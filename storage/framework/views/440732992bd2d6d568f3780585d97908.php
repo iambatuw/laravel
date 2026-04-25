@@ -1,0 +1,101 @@
+<?php $__env->startSection('title', 'Nöbet Noktaları | Nöbet Kontrol'); ?>
+<?php $__env->startSection('page-title', 'Nöbet Yerleşke Yönetimi'); ?>
+
+<?php $__env->startSection('content'); ?>
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-7">
+            <p class="text-muted mb-0 small"><i class="bi bi-info-circle me-1 text-primary"></i>Okul içerisindeki nöbet tutulan tüm alanları buradan organize edebilirsiniz.</p>
+        </div>
+        <div class="col-md-5 text-md-end mt-3 mt-md-0 d-flex justify-content-md-end gap-2">
+            <a href="<?php echo e(route('locations.trashed')); ?>" class="btn btn-outline-danger border-0 d-flex align-items-center gap-2">
+                <i class="bi bi-trash-fill"></i> Arşiv
+            </a>
+            <a href="<?php echo e(route('locations.create')); ?>" class="btn btn-primary d-flex align-items-center gap-2 px-4 shadow">
+                 <i class="bi bi-plus-square-fill"></i> Yeni Nokta Ekle
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <?php if($locations->count() > 0): ?>
+            <?php $__currentLoopData = $locations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $location): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="card h-100 border-0 shadow-lg" style="background: rgba(30, 41, 59, 0.4) !important; border: 1px solid rgba(255,255,255,0.05) !important; transition: transform 0.3s ease;">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <?php
+                                    $iconBg = $location->is_active ? 'var(--primary-gradient)' : 'rgba(255,255,255,0.05)';
+                                    $iconCls = $location->is_active ? 'text-white' : 'text-muted';
+                                ?>
+                                <div class="p-3 rounded-4" style="background: <?php echo e($iconBg); ?>; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(0,0,0,0.2);">
+                                    <i class="bi bi-geo-alt-fill fs-4 <?php echo e($iconCls); ?>"></i>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-dark border-0 p-2 rounded-3" data-bs-toggle="dropdown">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
+                                        <li><a class="dropdown-item text-light" href="<?php echo e(route('locations.edit', $location)); ?>"><i class="bi bi-pencil-square me-2 text-warning"></i> Düzenle</a></li>
+                                        <li><a class="dropdown-item text-light" href="<?php echo e(route('locations.show', $location)); ?>"><i class="bi bi-eye me-2 text-info"></i> Detay</a></li>
+                                        <li><hr class="dropdown-divider opacity-10"></li>
+                                        <li>
+                                            <form id="del-loc-<?php echo e($location->id); ?>" action="<?php echo e(route('locations.destroy', $location)); ?>" method="POST">
+                                                <?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?>
+                                                <button type="button" class="dropdown-item text-danger" onclick="confirmDelete('del-loc-<?php echo e($location->id); ?>', '<?php echo e($location->name); ?>')">
+                                                    <i class="bi bi-trash3 me-2"></i> Sil
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h5 class="fw-bold text-light mb-1"><?php echo e($location->name); ?></h5>
+                            <div class="text-primary small fw-bold mb-3 d-flex align-items-center gap-2">
+                                <i class="bi bi-layers"></i> <?php echo e($location->floor ?? 'Belirtilmedi'); ?>
+
+                            </div>
+                            
+                            <?php if($location->description): ?>
+                                <p class="text-muted small mb-4" style="font-size: 12px; height: 36px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                    <?php echo e($location->description); ?>
+
+                                </p>
+                            <?php else: ?>
+                                <div class="mb-4 opacity-0" style="height: 36px;"></div>
+                            <?php endif; ?>
+
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-top border-light border-opacity-10">
+                                <div class="text-center">
+                                    <div class="fw-bold text-light" style="font-size: 14px;"><?php echo e($location->capacity); ?></div>
+                                    <div class="text-muted extra-small" style="font-size: 9px; text-transform: uppercase;">Kapasite</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="fw-bold text-light" style="font-size: 14px;"><?php echo e($location->duty_assignments_count); ?></div>
+                                    <div class="text-muted extra-small" style="font-size: 9px; text-transform: uppercase;">Toplam Atama</div>
+                                </div>
+                                <span class="badge <?php echo e($location->is_active ? 'bg-success' : 'bg-secondary'); ?> px-2 py-1" style="font-size: 9px;">
+                                    <?php echo e($location->is_active ? 'AKTİF' : 'PASİF'); ?>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+            <div class="col-12 d-flex justify-content-center mt-4">
+                <?php echo e($locations->links()); ?>
+
+            </div>
+        <?php else: ?>
+            <div class="col-12 text-center py-5">
+                <div class="opacity-10 mb-3"><i class="bi bi-geo-fill fs-1" style="font-size: 80px !important;"></i></div>
+                <h5 class="text-muted">Tanımlanmış nöbet yeri bulunamadı.</h5>
+                <a href="<?php echo e(route('locations.create')); ?>" class="btn btn-primary mt-3 px-5">İlk Konumu Ekle</a>
+            </div>
+        <?php endif; ?>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\batuh\OneDrive\Masaüstü\laravel\resources\views/locations/index.blade.php ENDPATH**/ ?>
