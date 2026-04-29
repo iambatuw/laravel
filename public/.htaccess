@@ -1,7 +1,7 @@
 # Attempt to set PHP version to 8.2
-<IfModule mod_env.c>
-    AddHandler application/x-httpd-php82 .php
-</IfModule>
+# <IfModule mod_env.c>
+#     AddHandler application/x-httpd-php82 .php
+# </IfModule>
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
