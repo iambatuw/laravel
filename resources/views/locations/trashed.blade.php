@@ -18,18 +18,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Yer Adı</th>
-                                <th>Kat</th>
-                                <th>Silinme Tarihi</th>
-                                <th>İşlem</th>
+                                <th class="text-white-50">Yer Adı</th>
+                                <th class="text-white-50">Kat</th>
+                                <th class="text-white-50">Silinme Tarihi</th>
+                                <th class="text-white-50">İşlem</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($locations as $location)
                                 <tr>
-                                    <td class="fw-semibold">{{ $location->name }}</td>
-                                    <td>{{ $location->floor ?? '-' }}</td>
-                                    <td style="color: #999;">{{ $location->deleted_at->format('d.m.Y H:i') }}</td>
+                                    <td class="fw-semibold text-white">{{ $location->name }}</td>
+                                    <td class="text-white-50">{{ $location->floor ?? '-' }}</td>
+                                    <td class="text-white-50">{{ $location->deleted_at->format('d.m.Y H:i') }}</td>
                                     <td>
                                         <form action="{{ route('locations.restore', $location->id) }}" method="POST" class="d-inline">
                                             @csrf

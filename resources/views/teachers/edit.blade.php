@@ -28,7 +28,7 @@
                                 <div class="mb-4">
                                     <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Ad Soyad</label>
                                     <div class="input-group">
-                                        <span class="input-group-text bg-dark border-0 text-primary px-3"><i class="bi bi-person-badge"></i></span>
+                                        <span class="input-group-text border-0 text-primary px-3" style="background:rgba(255,255,255,0.05);"><i class="bi bi-person-badge"></i></span>
                                         <input type="text" class="form-control bg-dark border-0 text-light py-3 @error('name') is-invalid @enderror" name="name" value="{{ old('name', $teacher->name) }}" required>
                                     </div>
                                     @error('name') <div class="invalid-feedback d-block mt-2">{{ $message }}</div> @enderror
@@ -37,7 +37,7 @@
                                 <div class="mb-4">
                                     <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">E-posta Adresi</label>
                                     <div class="input-group">
-                                        <span class="input-group-text bg-dark border-0 text-primary px-3"><i class="bi bi-envelope-at"></i></span>
+                                        <span class="input-group-text border-0 text-primary px-3" style="background:rgba(255,255,255,0.05);"><i class="bi bi-envelope-at"></i></span>
                                         <input type="email" class="form-control bg-dark border-0 text-light py-3 @error('email') is-invalid @enderror" name="email" value="{{ old('email', $teacher->email) }}" required>
                                     </div>
                                     @error('email') <div class="invalid-feedback d-block mt-2">{{ $message }}</div> @enderror
@@ -46,7 +46,7 @@
                                 <div class="mb-4">
                                     <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Uzmanlık / Branş</label>
                                     <div class="input-group">
-                                        <span class="input-group-text bg-dark border-0 text-primary px-3"><i class="bi bi-mortarboard"></i></span>
+                                        <span class="input-group-text border-0 text-primary px-3" style="background:rgba(255,255,255,0.05);"><i class="bi bi-mortarboard"></i></span>
                                         <select class="form-select bg-dark border-0 text-light py-3 @error('branch') is-invalid @enderror" name="branch" required>
                                             @foreach(['Matematik', 'Türkçe', 'Fizik', 'Kimya', 'Biyoloji', 'Tarih', 'Coğrafya', 'İngilizce', 'Almanca', 'Müzik', 'Beden Eğitimi', 'Görsel Sanatlar', 'Bilişim Teknolojileri', 'Din Kültürü', 'Felsefe', 'Edebiyat'] as $branch)
                                                 <option value="{{ $branch }}" {{ old('branch', $teacher->branch) === $branch ? 'selected' : '' }}>{{ $branch }}</option>
@@ -62,7 +62,7 @@
                                 <div class="mb-4">
                                     <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">İletişim Numarası</label>
                                     <div class="input-group">
-                                        <span class="input-group-text bg-dark border-0 text-primary px-3"><i class="bi bi-phone"></i></span>
+                                        <span class="input-group-text border-0 text-primary px-3" style="background:rgba(255,255,255,0.05);"><i class="bi bi-phone"></i></span>
                                         <input type="text" class="form-control bg-dark border-0 text-light py-3 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $teacher->phone) }}">
                                     </div>
                                     @error('phone') <div class="invalid-feedback d-block mt-2">{{ $message }}</div> @enderror
@@ -71,7 +71,7 @@
                                 <div class="mb-4">
                                     <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Sistem Yetkisi</label>
                                     <div class="input-group">
-                                        <span class="input-group-text bg-dark border-0 text-primary px-3"><i class="bi bi-shield-check"></i></span>
+                                        <span class="input-group-text border-0 text-primary px-3" style="background:rgba(255,255,255,0.05);"><i class="bi bi-shield-check"></i></span>
                                         <select class="form-select bg-dark border-0 text-light py-3 @error('role') is-invalid @enderror" name="role" required>
                                             <option value="teacher" {{ old('role', $teacher->role) === 'teacher' ? 'selected' : '' }}>Öğretmen</option>
                                             <option value="admin" {{ old('role', $teacher->role) === 'admin' ? 'selected' : '' }}>Sistem Yöneticisi</option>
@@ -83,7 +83,7 @@
                                 <div class="mb-4">
                                     <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Profil Görseli</label>
                                     <div class="input-group">
-                                        <span class="input-group-text bg-dark border-0 text-primary px-3"><i class="bi bi-image"></i></span>
+                                        <span class="input-group-text border-0 text-primary px-3" style="background:rgba(255,255,255,0.05);"><i class="bi bi-image"></i></span>
                                         <input type="file" class="form-control bg-dark border-0 text-light py-3 @error('avatar') is-invalid @enderror" name="avatar" accept="image/*">
                                     </div>
                                     @if($teacher->avatar)
@@ -104,7 +104,7 @@
                             <div class="col-md-6">
                                 <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Yeni Şifre (İsteğe Bağlı)</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-dark border-0 text-warning px-3"><i class="bi bi-key"></i></span>
+                                        <span class="input-group-text border-0 text-warning px-3" style="background:rgba(255,255,255,0.05);"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control bg-dark border-0 text-light py-3 @error('password') is-invalid @enderror" name="password" placeholder="Değiştirmek istemiyorsanız boş bırakın">
                                 </div>
                                 @error('password') <div class="invalid-feedback d-block mt-2">{{ $message }}</div> @enderror
@@ -113,7 +113,7 @@
                             <div class="col-md-6">
                                 <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Şifre Onayı</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-dark border-0 text-warning px-3"><i class="bi bi-key-fill"></i></span>
+                                        <span class="input-group-text border-0 text-warning px-3" style="background:rgba(255,255,255,0.05);"><i class="bi bi-key-fill"></i></span>
                                     <input type="password" class="form-control bg-dark border-0 text-light py-3" name="password_confirmation" placeholder="Yeni şifreyi onaylayın">
                                 </div>
                             </div>
