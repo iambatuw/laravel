@@ -6,21 +6,31 @@ use App\Http\Requests\StoreLocationRequest;
 use App\Http\Requests\UpdateLocationRequest;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class LocationController extends Controller
 {
     public function csvImport(Request $request)
     {
         $request->validate([
-            'csv_file' => ['required', 'file', 'mimes:csv,txt', 'max:2048'],
+            'csv_file' => ['required', 'file', 'mimes:csv,txt,xlsx,xls', 'max:2048'],
         ], [
-            'csv_file.required' => 'CSV dosyası seçmelisiniz.',
-            'csv_file.mimes' => 'Dosya CSV formatında olmalıdır.',
+            'csv_file.required' => 'Dosya seçmelisiniz.',
+            'csv_file.mimes' => 'Dosya CSV veya Excel (xlsx/xls) formatında olmalıdır.',
         ]);
 
         $file = $request->file('csv_file');
-        $rows = array_map('str_getcsv', file($file->getRealPath()));
-        $header = array_map('trim', array_shift($rows));
+        $ext = strtolower($file->getClientOriginalExtension());
+
+        if (in_array($ext, ['xlsx', 'xls'])) {
+            $spreadsheet = IOFactory::load($file->getRealPath());
+            $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, false);
+            $header = array_map('trim', array_shift($sheetData));
+            $rows = $sheetData;
+        } else {
+            $rows = array_map('str_getcsv', file($file->getRealPath()));
+            $header = array_map('trim', array_shift($rows));
+        }
 
         $imported = 0;
         $skipped = 0;
