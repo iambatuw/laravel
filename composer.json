@@ -71,7 +71,7 @@
         "platform": {
             "php": "8.2.0"
         },
-        "platform-check": false
+        "platform-check": true
     },
     "minimum-stability": "stable",
     "prefer-stable": true
