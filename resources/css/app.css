@@ -253,3 +253,24 @@ label { color: rgba(255,255,255,0.9) !important; font-weight: 700; margin-bottom
     cursor: pointer;
 }
 @media (max-width: 992px) { .menu-toggle { display: flex; } }
+
+/* Dropdown Dark Theme Override */
+.dropdown-menu {
+    background: var(--sidebar-bg) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+}
+.dropdown-menu .dropdown-item {
+    color: rgba(255,255,255,0.8) !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease;
+}
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+    background: rgba(255,255,255,0.08) !important;
+    color: #fff !important;
+}
+.dropdown-menu .dropdown-divider {
+    border-color: rgba(255,255,255,0.1) !important;
+}
