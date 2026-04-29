@@ -279,13 +279,8 @@
         }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-    <div id="safety-block">
-        <div style="font-size: 100px; margin-bottom: 25px;">🔒</div>
-        <h2 style="font-weight: 900; font-size: 42px;">GÜVENLİ ERİŞİM MODU</h2>
-        <p style="opacity: 0.6; font-size: 18px;">Geliştirici araçlarının kullanımına izin verilmiyor.</p>
-    </div>
 
     <div class="tv-container">
         <header class="top-banner">
@@ -381,28 +376,6 @@
         }
         setInterval(updateTime, 1000);
         updateTime();
-
-        // Gelişmiş Güvenlik Scripti
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-                showSafety();
-            }
-        });
-
-        function showSafety() {
-            document.getElementById('safety-block').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            console.clear();
-            console.log('%cDUR!', 'color:red; font-size:50px; font-weight:bold;');
-        }
-
-        // Konsol kontrolü
-        setInterval(() => {
-            const diff = window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160;
-            if (diff) showSafety();
-        }, 1000);
     </script>
 </body>
 </html>
