@@ -4,17 +4,29 @@
 @section('page-title', 'Tüm Nöbet Çizelgeleri')
 
 @section('content')
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center gap-2 mb-4" role="alert">
+            <i class="bi bi-check-circle-fill"></i><span>{{ session('success') }}</span>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
     <div class="row mb-5 align-items-center">
-        <div class="col-md-7">
+        <div class="col-md-5">
             <p class="text-muted mb-0"><i class="bi bi-info-circle-fill me-2 text-primary"></i>Geçmiş ve gelecek tüm nöbet programlarını buradan yönetebilirsiniz.</p>
         </div>
-        <div class="col-md-5 text-md-end mt-3 mt-md-0">
+        <div class="col-md-7 text-md-end mt-3 mt-md-0 d-flex flex-wrap justify-content-md-end gap-2">
+            <button type="button" class="btn btn-outline-danger border-0 d-flex align-items-center gap-2" id="schBulkDeleteBtn" style="display:none;" onclick="submitSchBulkDelete()">
+                <i class="bi bi-trash3-fill"></i> Seçilenleri Sil (<span id="schSelectedCount">0</span>)
+            </button>
             <a href="{{ route('schedules.create') }}" class="btn btn-primary px-4 py-2 shadow-sm fw-bold">
                  <i class="bi bi-plus-lg me-2"></i> Yeni Çizelge Oluştur
             </a>
         </div>
     </div>
 
+    <form id="schBulkDeleteForm" action="{{ route('schedules.bulk-delete') }}" method="POST">
+    @csrf
     <div class="card border-0">
         <div class="card-body p-0">
             @if($schedules->count() > 0)
@@ -22,7 +34,8 @@
                     <table class="table align-middle mb-0">
                         <thead>
                             <tr>
-                                <th class="ps-5">Tarih</th>
+                                <th class="ps-4" style="width:40px;"><input type="checkbox" class="form-check-input" id="schSelectAll"></th>
+                                <th>Tarih</th>
                                 <th>Başlık / Açıklama</th>
                                 <th class="text-center">Atamalar</th>
                                 <th>Oluşturan</th>
@@ -37,7 +50,8 @@
                                     $dateBg = $isToday ? 'var(--primary-gradient)' : 'rgba(255,255,255,0.05)';
                                 @endphp
                                 <tr>
-                                    <td class="ps-5">
+                                    <td class="ps-4"><input type="checkbox" class="form-check-input sch-check" name="ids[]" value="{{ $schedule->id }}"></td>
+                                    <td>
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="text-center p-2 rounded-3" style="width: 46px; background: {{ $dateBg }}; border: 1px solid rgba(255,255,255,0.1);">
                                                 <div class="fw-bold" style="font-size: 15px; color: #fff;">{{ $schedule->date->format('d') }}</div>
@@ -114,4 +128,43 @@
             @endif
         </div>
     </div>
+    </form>
 @endsection
+
+@push('scripts')
+<script>
+    const schSelectAll = document.getElementById('schSelectAll');
+    const schChecks = document.querySelectorAll('.sch-check');
+    const schBulkBtn = document.getElementById('schBulkDeleteBtn');
+    const schCountSpan = document.getElementById('schSelectedCount');
+
+    function updateSchBulk() {
+        const checked = document.querySelectorAll('.sch-check:checked').length;
+        schCountSpan.textContent = checked;
+        schBulkBtn.style.display = checked > 0 ? '' : 'none';
+    }
+    schSelectAll?.addEventListener('change', function() {
+        schChecks.forEach(c => c.checked = this.checked);
+        updateSchBulk();
+    });
+    schChecks.forEach(c => c.addEventListener('change', updateSchBulk));
+
+    function submitSchBulkDelete() {
+        const count = document.querySelectorAll('.sch-check:checked').length;
+        if (count === 0) return;
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: count + ' çizelge ve tüm atamaları silinecek!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                confirmButtonText: 'Evet, Sil',
+                cancelButtonText: 'İptal'
+            }).then((r) => { if (r.isConfirmed) document.getElementById('schBulkDeleteForm').submit(); });
+        } else if (confirm(count + ' çizelge silinecek. Emin misiniz?')) {
+            document.getElementById('schBulkDeleteForm').submit();
+        }
+    }
+</script>
+@endpush

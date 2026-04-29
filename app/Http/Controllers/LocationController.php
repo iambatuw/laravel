@@ -64,6 +64,13 @@ class LocationController extends Controller
         return redirect()->route('locations.index')->with($imported > 0 ? 'success' : 'error', $msg);
     }
 
+    public function bulkDelete(Request $request)
+    {
+        $request->validate(['ids' => ['required', 'array'], 'ids.*' => ['exists:locations,id']]);
+        Location::whereIn('id', $request->ids)->delete();
+        return redirect()->route('locations.index')->with('success', count($request->ids) . ' nöbet yeri başarıyla silindi.');
+    }
+
     public function index()
     {
         $locations = Location::withCount('dutyAssignments')
