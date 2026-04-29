@@ -252,14 +252,14 @@
                         </div>
                         <div class="col-6">
                             <a href="{{ route('teachers.create') }}" class="btn btn-dark w-100 py-3 rounded-3 border-0 d-flex flex-column align-items-center gap-1 transition-hover" style="background: rgba(255,255,255,0.03);">
-                                <div class="bg-info bg-opacity-10 rounded-circle p-2"><i class="bi bi-person-plus text-info fs-6"></i></div>
+                                <div class="bg-info bg-opacity-10 rounded-circle p-2"><i class="bi bi-person-fill-add text-info fs-6"></i></div>
                                 <span class="small fw-bold text-white" style="font-size: 11px;">Öğretmen</span>
                             </a>
                         </div>
                         <div class="col-6">
                             <a href="{{ route('locations.create') }}" class="btn btn-dark w-100 py-3 rounded-3 border-0 d-flex flex-column align-items-center gap-1 transition-hover" style="background: rgba(255,255,255,0.03);">
-                                <div class="bg-warning bg-opacity-10 rounded-circle p-2"><i class="bi bi-plus-square text-warning fs-6"></i></div>
-                                <span class="small fw-bold text-white" style="font-size: 11px;">Nokta</span>
+                                <div class="bg-warning bg-opacity-10 rounded-circle p-2"><i class="bi bi-geo-alt-fill text-warning fs-6"></i></div>
+                                <span class="small fw-bold text-white" style="font-size: 11px;">Nokta Ekle</span>
                             </a>
                         </div>
                     </div>
