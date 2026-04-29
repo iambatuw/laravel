@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="60">
-    <title>Canlı Nöbet Panosu | Nöbet Kontrol v2.0</title>
+    <title>Canlı Nöbet Panosu</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -306,6 +306,7 @@
                     <span class="opacity-25 mx-3">|</span>
                     <span class="text-white fw-bold">{{ $schedule->day_of_week ?? $today->translatedFormat('l') }}</span>
                 </div>
+                <a href="{{ route('login') }}" class="btn-login" style="display:inline-block;margin-top:8px;padding:8px 20px;background:var(--primary-gradient);color:#fff;text-decoration:none;border-radius:30px;font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;box-shadow:0 8px 20px rgba(79,70,229,0.4);transition:all 0.3s;">Giriş Yap</a>
             </div>
         </header>
 
