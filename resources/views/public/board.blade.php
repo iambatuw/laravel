@@ -331,9 +331,9 @@
                                     @foreach($grouped[$id]->sortBy('location.name') as $assign)
                                         <tr>
                                             <td class="teacher-cell">
-                                                <span class="name" style="display:flex;align-items:center;gap:8px;">
+                                                <span class="name">
                                                     @if($assign->status === 'assigned')
-                                                        <span class="pulse-dot" style="flex-shrink:0;"></span>
+                                                        <span class="pulse-dot me-2"></span>
                                                     @endif
                                                     {{ $assign->teacher->name }}
                                                 </span>

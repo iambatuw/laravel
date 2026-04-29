@@ -11,13 +11,6 @@ use Illuminate\Http\Request;
 
 class DutyScheduleController extends Controller
 {
-    public function bulkDelete(Request $request)
-    {
-        $request->validate(['ids' => ['required', 'array'], 'ids.*' => ['exists:duty_schedules,id']]);
-        DutySchedule::whereIn('id', $request->ids)->delete();
-        return redirect()->route('schedules.index')->with('success', count($request->ids) . ' çizelge başarıyla silindi.');
-    }
-
     public function index()
     {
         $schedules = DutySchedule::with('creator')

@@ -17,14 +17,6 @@ use Illuminate\Support\Facades\Route;
    ======================================== */
 Route::get('/', [PublicController::class, 'board'])->name('public.board');
 
-Route::get('/clear-cache', function() {
-    \Illuminate\Support\Facades\Artisan::call('cache:clear');
-    \Illuminate\Support\Facades\Artisan::call('config:clear');
-    \Illuminate\Support\Facades\Artisan::call('route:clear');
-    \Illuminate\Support\Facades\Artisan::call('view:clear');
-    return "Cache cleared!";
-});
-
 /* ========================================
    Giris Sayfasi (Misafir)
    ======================================== */
@@ -72,8 +64,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('ogretmenler', TeacherController::class)
             ->parameters(['ogretmenler' => 'teacher'])
             ->names('teachers');
-        Route::post('/ogretmenler/toplu-ekle', [TeacherController::class, 'csvImport'])->name('teachers.csv-import');
-        Route::post('/ogretmenler/toplu-sil', [TeacherController::class, 'bulkDelete'])->name('teachers.bulk-delete');
         Route::get('/ogretmenler-silinen', [TeacherController::class, 'trashed'])->name('teachers.trashed');
         Route::patch('/ogretmenler-geri-yukle/{id}', [TeacherController::class, 'restore'])->name('teachers.restore');
 
@@ -81,8 +71,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('nobet-yerleri', LocationController::class)
             ->parameters(['nobet-yerleri' => 'location'])
             ->names('locations');
-        Route::post('/nobet-yerleri/toplu-ekle', [LocationController::class, 'csvImport'])->name('locations.csv-import');
-        Route::post('/nobet-yerleri/toplu-sil', [LocationController::class, 'bulkDelete'])->name('locations.bulk-delete');
         Route::get('/nobet-yerleri-silinen', [LocationController::class, 'trashed'])->name('locations.trashed');
         Route::patch('/nobet-yerleri-geri-yukle/{id}', [LocationController::class, 'restore'])->name('locations.restore');
 
@@ -90,7 +78,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('nobet-cizelgeleri', DutyScheduleController::class)
             ->parameters(['nobet-cizelgeleri' => 'schedule'])
             ->names('schedules');
-        Route::post('/nobet-cizelgeleri/toplu-sil', [DutyScheduleController::class, 'bulkDelete'])->name('schedules.bulk-delete');
         Route::patch('/nobet-cizelgeleri/{schedule}/yayinla', [DutyScheduleController::class, 'publish'])->name('schedules.publish');
         Route::get('/nobet-cizelgeleri/{schedule}/yazdir', [DutyScheduleController::class, 'printSchedule'])->name('schedules.print');
 

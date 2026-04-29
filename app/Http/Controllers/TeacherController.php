@@ -7,96 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class TeacherController extends Controller
 {
-    public function csvImport(Request $request)
-    {
-        $request->validate([
-            'csv_file' => ['required', 'file', 'mimes:csv,txt,xlsx,xls', 'max:2048'],
-        ], [
-            'csv_file.required' => 'Dosya seçmelisiniz.',
-            'csv_file.mimes' => 'Dosya CSV veya Excel formatında olmalıdır.',
-        ]);
-
-        $file = $request->file('csv_file');
-        $ext = strtolower($file->getClientOriginalExtension());
-
-        if (in_array($ext, ['xlsx', 'xls'])) {
-            $spreadsheet = IOFactory::load($file->getRealPath());
-            $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, false);
-            $header = array_map('trim', array_shift($sheetData));
-            $rows = $sheetData;
-        } else {
-            $rows = array_map('str_getcsv', file($file->getRealPath()));
-            $header = array_map('trim', array_shift($rows));
-        }
-
-        $imported = 0;
-        $skipped = 0;
-        $errors = [];
-
-        foreach ($rows as $i => $row) {
-            if (count($row) < count($header)) continue;
-            $data = array_combine($header, array_map('trim', $row));
-            $line = $i + 2;
-
-            $name = $data['ad_soyad'] ?? $data['ad'] ?? $data['name'] ?? '';
-            $email = $data['eposta'] ?? $data['email'] ?? '';
-            $branch = $data['brans'] ?? $data['branş'] ?? $data['branch'] ?? '';
-
-            if (empty($name) || empty($email)) {
-                $errors[] = "Satır {$line}: Ad veya e-posta boş.";
-                continue;
-            }
-
-            if (User::where('email', $email)->exists()) {
-                $skipped++;
-                continue;
-            }
-
-            $password = $data['sifre'] ?? $data['password'] ?? 'password';
-            $phone = $data['telefon'] ?? $data['phone'] ?? null;
-            $role = $data['rol'] ?? $data['role'] ?? 'teacher';
-            $roleMap = ['öğretmen' => 'teacher', 'ogretmen' => 'teacher', 'yönetici' => 'admin', 'yonetici' => 'admin'];
-            $role = $roleMap[mb_strtolower($role)] ?? $role;
-
-            User::create([
-                'name' => $name,
-                'email' => $email,
-                'password' => Hash::make($password),
-                'branch' => $branch ?: null,
-                'phone' => $phone,
-                'role' => in_array($role, ['admin', 'teacher']) ? $role : 'teacher',
-            ]);
-            $imported++;
-        }
-
-        $msg = "{$imported} öğretmen başarıyla eklendi.";
-        if ($skipped > 0) $msg .= " {$skipped} adet zaten kayıtlı olduğu için atlandı.";
-        if (!empty($errors)) $msg .= ' ' . count($errors) . ' satırda hata: ' . implode(' | ', array_slice($errors, 0, 3));
-
-        return redirect()->route('teachers.index')->with($imported > 0 ? 'success' : 'error', $msg);
-    }
-
-    public function bulkDelete(Request $request)
-    {
-        $request->validate(['ids' => ['required', 'array'], 'ids.*' => ['exists:users,id']]);
-
-        $count = 0;
-        foreach ($request->ids as $id) {
-            $teacher = User::find($id);
-            if ($teacher && $teacher->id !== auth()->id()) {
-                if ($teacher->avatar) Storage::disk('public')->delete($teacher->avatar);
-                $teacher->delete();
-                $count++;
-            }
-        }
-
-        return redirect()->route('teachers.index')->with('success', "{$count} öğretmen başarıyla silindi.");
-    }
-
     public function index()
     {
         $teachers = User::where('role', 'teacher')

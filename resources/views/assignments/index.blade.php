@@ -100,7 +100,7 @@
             {{-- CSV ile Atama İçe Aktar --}}
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-transparent border-light border-opacity-10 py-3">
-                    <h6 class="mb-0 fw-bold text-white"><i class="bi bi-upload me-2 text-success"></i>CSV / Excel ile Toplu Atama</h6>
+                    <h6 class="mb-0 fw-bold text-white"><i class="bi bi-upload me-2 text-success"></i>CSV ile Toplu Atama</h6>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('assignments.csv-import') }}" method="POST" enctype="multipart/form-data">
@@ -115,8 +115,8 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label small fw-bold text-white-50">CSV / Excel Dosyası</label>
-                            <input type="file" class="form-control" name="csv_file" accept=".csv,.txt,.xlsx,.xls" required>
+                            <label class="form-label small fw-bold text-white-50">CSV Dosyası</label>
+                            <input type="file" class="form-control" name="csv_file" accept=".csv,.txt" required>
                         </div>
                         <button type="submit" class="btn btn-success w-100 fw-bold">
                             <i class="bi bi-cloud-upload me-1"></i>İçe Aktar
@@ -124,14 +124,13 @@
                     </form>
 
                     <div class="mt-3 p-3 bg-dark bg-opacity-25 rounded-3">
-                        <div class="small fw-bold text-white mb-2"><i class="bi bi-info-circle text-info me-1"></i>Dosya Formatı (CSV veya Excel)</div>
+                        <div class="small fw-bold text-white mb-2"><i class="bi bi-info-circle text-info me-1"></i>CSV Formatı</div>
                         <code class="small d-block text-info" style="font-size: 11px;">
-                            ogretmen | nobet_yeri | periyot<br>
-                            Fatma Demir | 1. Kat Koridor | sabah<br>
-                            Ali Aksoy | Kantin Önü | ogle
+                            ogretmen,nobet_yeri,periyot<br>
+                            Fatma Demir,1. Kat Koridor,sabah<br>
+                            Ali Aksoy,Kantin Önü,ogle
                         </code>
                         <div class="text-muted small mt-2" style="font-size: 10px;">
-                            Desteklenen: .csv, .xlsx, .xls<br>
                             Periyot: sabah, ogle, ikindi<br>
                             Opsiyonel: baslangic, bitis sütunları (ör: 13:30, 16:20)
                         </div>
@@ -142,14 +141,14 @@
             {{-- CSV ile Nöbet Yeri İçe Aktar --}}
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-transparent border-light border-opacity-10 py-3">
-                    <h6 class="mb-0 fw-bold text-white"><i class="bi bi-geo-alt-fill me-2 text-warning"></i>CSV / Excel ile Toplu Nöbet Yeri</h6>
+                    <h6 class="mb-0 fw-bold text-white"><i class="bi bi-geo-alt-fill me-2 text-warning"></i>CSV ile Toplu Nöbet Yeri</h6>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('locations.csv-import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label small fw-bold text-white-50">CSV / Excel Dosyası</label>
-                            <input type="file" class="form-control" name="csv_file" accept=".csv,.txt,.xlsx,.xls" required>
+                            <label class="form-label small fw-bold text-white-50">CSV Dosyası</label>
+                            <input type="file" class="form-control" name="csv_file" accept=".csv,.txt" required>
                         </div>
                         <button type="submit" class="btn btn-warning w-100 fw-bold text-dark">
                             <i class="bi bi-cloud-upload me-1"></i>Nöbet Yerlerini Ekle
@@ -157,14 +156,13 @@
                     </form>
 
                     <div class="mt-3 p-3 bg-dark bg-opacity-25 rounded-3">
-                        <div class="small fw-bold text-white mb-2"><i class="bi bi-info-circle text-info me-1"></i>Dosya Formatı (CSV veya Excel)</div>
+                        <div class="small fw-bold text-white mb-2"><i class="bi bi-info-circle text-info me-1"></i>CSV Formatı</div>
                         <code class="small d-block text-info" style="font-size: 11px;">
-                            ad | kat | aciklama<br>
-                            Kantin Önü | Giriş Kat | Ana giriş<br>
-                            Öğretmenler Odası | 3. Kat | İdari bölge
+                            ad,kat,aciklama<br>
+                            Kantin Önü,Giriş Kat,Ana giriş<br>
+                            Öğretmenler Odası,3. Kat,İdari bölge
                         </code>
                         <div class="text-muted small mt-2" style="font-size: 10px;">
-                            Desteklenen: .csv, .xlsx, .xls<br>
                             Opsiyonel sütunlar: kat, aciklama, kapasite
                         </div>
                     </div>

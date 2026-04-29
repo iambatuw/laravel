@@ -7,7 +7,6 @@ use App\Models\DutySchedule;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class DutyAssignmentController extends Controller
 {
@@ -27,26 +26,17 @@ class DutyAssignmentController extends Controller
     public function csvImport(Request $request)
     {
         $request->validate([
-            'csv_file' => ['required', 'file', 'mimes:csv,txt,xlsx,xls', 'max:2048'],
+            'csv_file' => ['required', 'file', 'mimes:csv,txt', 'max:2048'],
             'duty_schedule_id' => ['required', 'exists:duty_schedules,id'],
         ], [
-            'csv_file.required' => 'Dosya seçmelisiniz.',
-            'csv_file.mimes' => 'Dosya CSV veya Excel (xlsx/xls) formatında olmalıdır.',
+            'csv_file.required' => 'CSV dosyası seçmelisiniz.',
+            'csv_file.mimes' => 'Dosya CSV formatında olmalıdır.',
             'duty_schedule_id.required' => 'Çizelge seçimi zorunludur.',
         ]);
 
         $file = $request->file('csv_file');
-        $ext = strtolower($file->getClientOriginalExtension());
-
-        if (in_array($ext, ['xlsx', 'xls'])) {
-            $spreadsheet = IOFactory::load($file->getRealPath());
-            $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, false);
-            $header = array_map('trim', array_shift($sheetData));
-            $rows = $sheetData;
-        } else {
-            $rows = array_map('str_getcsv', file($file->getRealPath()));
-            $header = array_map('trim', array_shift($rows));
-        }
+        $rows = array_map('str_getcsv', file($file->getRealPath()));
+        $header = array_map('trim', array_shift($rows));
 
         $imported = 0;
         $errors = [];
