@@ -247,8 +247,6 @@
 
         .cf-turnstile {
             margin: 0 0 20px;
-            display: flex;
-            justify-content: center;
         }
 
         .btn-login {
