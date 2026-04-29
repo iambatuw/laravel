@@ -1,26 +1,56 @@
 # Nöbetçi Öğretmen Takip Sistemi
 
-Okul bünyesindeki günlük nöbet çizelgelerini oluşturan ve nöbet yerlerini (bahçe, katlar vb.) dijital ortamda yöneten Laravel tabanlı web paneli.
+Okul bünyesindeki günlük nöbet çizelgelerini dijital ortamda oluşturan, öğretmen atamalarını yöneten ve canlı nöbet panosu sunan Laravel tabanlı modern web uygulaması.
 
-## Proje Hakkında
+> **Canlı Demo:** [https://1648.altekbilisim.com/public/](https://1648.altekbilisim.com/public/)
 
-Bu sistem ile:
-- Günlük nöbet çizelgeleri oluşturulabilir
-- Nöbet yerleri (bahçe, kat koridorları, kantin önü vb.) yönetilebilir
-- Öğretmenler nöbet yerlerine atanabilir
-- Öğretmenler kendi aralarında nöbet takası talep edebilir
-- Nöbet geçmişi ve istatistikleri takip edilebilir
+---
 
-## Teknik Özellikler
+## Özellikler
 
-- **Framework:** Laravel 11
-- **Veritabanı:** MySQL
-- **Authentication:** Manuel Login sistemi
-- **Yetkilendirme:** Admin Middleware
-- **Arayüz:** Blade Template Engine + Bootstrap 5
-- **Bildirimler:** SweetAlert2 (Flash Messages)
-- **Soft Deletes:** Tüm modellerde aktif
-- **Pagination:** Tüm liste sayfalarında aktif
+### Temel Fonksiyonlar
+- Günlük / haftalık nöbet çizelgesi oluşturma ve yönetme
+- Öğretmenleri nöbet noktalarına atama (periyot bazlı)
+- Nöbet noktaları yönetimi (bahçe, kat koridorları, kantin önü vb.)
+- Öğretmenler arası nöbet takas talep sistemi
+- Canlı nöbet panosu (TV / projeksiyon görünümü)
+- Hızlı nöbet atama (admin dashboard'dan tek tıkla)
+- Nöbet çizelgesi PDF yazdırma
+- Profil ve parola yönetimi
+
+### Güvenlik
+- **Cloudflare Turnstile** entegrasyonu (bot koruması)
+- **Content Security Policy (CSP)** başlıkları
+- HSTS, X-Frame-Options, X-Content-Type-Options başlıkları
+- Rate limiting ile brute-force koruması
+- CSRF token doğrulaması
+
+### Tasarım ve Arayüz
+- Koyu tema (dark mode) tasarım
+- **Inter** font ailesi
+- Bootstrap 5 + özel CSS değişkenleri
+- Duyarlı tasarım (mobil uyumlu)
+- SweetAlert2 ile onay diyalogları ve bildirimler
+- Türkçe arayüz ve sayfalama
+
+---
+
+## Teknik Altyapı
+
+| Bileşen | Teknoloji |
+|---------|-----------|
+| Framework | Laravel 11 |
+| PHP | 8.2+ |
+| Veritabanı | MySQL |
+| Ön Yüz | Blade + Bootstrap 5 |
+| Varlık Derleme | Vite |
+| Font | Inter (Google Fonts) |
+| İkonlar | Bootstrap Icons |
+| Bildirimler | SweetAlert2 |
+| Bot Koruması | Cloudflare Turnstile |
+| Deploy | GitHub Actions + FTP |
+
+---
 
 ## Kurulum
 
@@ -28,76 +58,85 @@ Bu sistem ile:
 - PHP 8.2+
 - Composer
 - MySQL
-- Node.js (opsiyonel, Vite için)
+- Node.js 20+ ve npm
 
 ### Adımlar
 
-1. **Projeyi klonlayın:**
 ```bash
-git clone <REPO_URL>
-cd nobetci-ogretmen-takip
-```
+# 1. Projeyi klonlayın
+git clone https://github.com/iambatuw/laravel.git
+cd laravel
 
-2. **Bağımlılıkları yükleyin:**
-```bash
+# 2. PHP bağımlılıklarını yükleyin
 composer install
-```
 
-3. **Ortam dosyasını oluşturun:**
-```bash
+# 3. Ortam dosyasını oluşturun
 cp .env.example .env
-```
 
-4. **Uygulama anahtarını oluşturun:**
-```bash
+# 4. Uygulama anahtarını oluşturun
 php artisan key:generate
-```
 
-5. **Veritabanı ayarlarını yapın:**
-`.env` dosyasındaki `DB_DATABASE`, `DB_USERNAME` ve `DB_PASSWORD` alanlarını düzenleyin.
+# 5. .env dosyasında veritabanı ayarlarını yapın
+# DB_DATABASE, DB_USERNAME, DB_PASSWORD
 
-6. **Tabloları oluşturun ve test verisi yükleyin:**
-```bash
+# 6. Tabloları oluşturun ve test verisi yükleyin
 php artisan migrate --seed
-```
 
-7. **Storage linkini oluşturun:**
-```bash
+# 7. Storage linkini oluşturun
 php artisan storage:link
-```
 
-8. **Sunucuyu başlatın:**
-```bash
+# 8. Vite varlıklarını derleyin
+npm install && npm run build
+
+# 9. Sunucuyu başlatın
 php artisan serve
 ```
 
 Uygulama `http://localhost:8000` adresinde açılacaktır.
 
+### Cloudflare Turnstile Yapılandırması
+
+`.env` dosyasına Turnstile anahtarlarını ekleyin:
+
+```env
+TURNSTILE_SITE_KEY=your_site_key
+TURNSTILE_SECRET_KEY=your_secret_key
+```
+
+> Anahtarlar boş bırakılırsa Turnstile devre dışı kalır, giriş normal şekilde çalışır.
+
+---
+
 ## Giriş Bilgileri (Test)
 
-| Rol | E-posta | Şifre |
-|-----|---------|-------|
-| **Admin** | admin@nobetci.com | password |
-| **Öğretmen** | fatma.demir@nobetci.com | password |
+| Rol | E-posta | Parola |
+|-----|---------|--------|
+| Yönetici | admin@nobetci.com | password |
+| Öğretmen | fatma.demir@nobetci.com | password |
+
+---
 
 ## Veritabanı Yapısı
 
 ```
-users            - Yöneticiler ve öğretmenler
-locations        - Nöbet yerleri (bahçe, kat koridorları vb.)
-duty_schedules   - Günlük nöbet çizelgeleri
-duty_assignments - Nöbet atamaları (öğretmen-yer-zaman)
-swap_requests    - Nöbet takas talepleri
+users              Yöneticiler ve öğretmenler
+locations          Nöbet yerleri (bahçe, kat koridorları vb.)
+duty_schedules     Günlük nöbet çizelgeleri
+duty_assignments   Nöbet atamaları (öğretmen - yer - zaman)
+swap_requests      Nöbet takas talepleri
+sessions           Oturum yönetimi
+cache              Önbellek tablosu
 ```
 
-### İlişkiler (Eloquent Relationships)
+### İlişkiler
 
-- `User` hasMany `DutyAssignment` (Bir öğretmenin birçok nöbeti)
-- `User` hasMany `DutySchedule` (Yöneticinin oluşturduğu çizelgeler)
-- `Location` hasMany `DutyAssignment` (Bir yerin birçok ataması)
-- `DutySchedule` hasMany `DutyAssignment` (Bir çizelgenin birçok ataması)
+- `User` hasMany `DutyAssignment`, `DutySchedule`, `SwapRequest`
+- `Location` hasMany `DutyAssignment`
+- `DutySchedule` hasMany `DutyAssignment`, belongsTo `User` (oluşturan)
 - `DutyAssignment` belongsTo `User`, `Location`, `DutySchedule`
-- `SwapRequest` belongsTo `User` (requester, target, approver)
+- `SwapRequest` belongsTo `User` (talep eden, hedef, onaylayan)
+
+---
 
 ## Proje Yapısı
 
@@ -105,58 +144,74 @@ swap_requests    - Nöbet takas talepleri
 app/
 ├── Http/
 │   ├── Controllers/
-│   │   ├── Auth/LoginController.php
+│   │   ├── Auth/
+│   │   │   ├── LoginController.php
+│   │   │   └── PasswordResetController.php
 │   │   ├── DashboardController.php
 │   │   ├── DutyAssignmentController.php
 │   │   ├── DutyScheduleController.php
 │   │   ├── LocationController.php
 │   │   ├── ProfileController.php
+│   │   ├── PublicController.php
 │   │   ├── SwapRequestController.php
 │   │   └── TeacherController.php
-│   ├── Middleware/
-│   │   └── AdminMiddleware.php
-│   └── Requests/
-│       ├── StoreDutyScheduleRequest.php
-│       ├── StoreLocationRequest.php
-│       ├── StoreTeacherRequest.php
-│       └── UpdateLocationRequest.php
+│   └── Middleware/
+│       ├── AdminMiddleware.php
+│       └── SecurityHeadersMiddleware.php
 ├── Models/
 │   ├── DutyAssignment.php
 │   ├── DutySchedule.php
 │   ├── Location.php
 │   ├── SwapRequest.php
 │   └── User.php
-database/
-├── factories/
-├── migrations/
-└── seeders/DatabaseSeeder.php
-resources/views/
-├── assignments/
-├── auth/
-├── dashboard/
-├── errors/
-├── layouts/
-├── locations/
-├── profile/
-├── schedules/
-├── swap_requests/
-└── teachers/
+config/
+└── services.php              (Turnstile yapılandırması)
+resources/
+├── css/app.css               (Ana stil dosyası)
+├── js/app.js
+└── views/
+    ├── auth/                 (Giriş, parola sıfırlama)
+    ├── dashboard/            (Admin ve öğretmen paneli)
+    ├── layouts/              (Ana şablon, sidebar, navbar)
+    ├── locations/            (Nöbet noktaları CRUD)
+    ├── profile/              (Profil ve güvenlik ayarları)
+    ├── schedules/            (Çizelge CRUD, yazdırma)
+    ├── swap_requests/        (Takas talepleri)
+    └── teachers/             (Öğretmen yönetimi)
 ```
+
+---
+
+## Deploy
+
+Proje **GitHub Actions** ile otomatik deploy edilmektedir.
+
+- `main` dalına push yapıldığında workflow tetiklenir
+- Composer bağımlılıkları yüklenir, Vite varlıkları derlenir
+- FTP ile sunucuya aktarılır
+
+Workflow dosyası: `.github/workflows/deploy.yml`
+
+> **Not:** `.env` dosyası deploy kapsamında gönderilmez. Sunucudaki `.env` dosyası FTP ile manuel yönetilir.
+
+---
 
 ## Kullanılan Laravel Özellikleri
 
-- **Migrations:** Tüm tablolar migration ile oluşturulmuştur
-- **Eloquent ORM:** Model ilişkileri (hasMany, belongsTo)
-- **Seeders:** 20 öğretmen, 10 nöbet yeri, 1 haftalık çizelge test verisi
-- **Middleware:** Admin erişim kontrolü
-- **Form Request Validation:** Ayrı Request sınıfları ile doğrulama
-- **Soft Deletes:** Silinen kayıtlar `deleted_at` ile işaretlenir
-- **Resource Controllers:** CRUD operasyonları standart metot isimleri ile
-- **Named Routes:** Tüm linkler `route()` helper ile
-- **Blade Templating:** `@extends`, `@section`, `@include`, `@stack` kullanımı
-- **Flash Messages:** SweetAlert2 ile anlık bildirimler
-- **File Storage:** Avatar yüklemeleri Laravel Storage sistemi ile
-- **Pagination:** Sayfalama tüm listeleme sayfalarında aktif
+- **Eloquent ORM** — Model ilişkileri (hasMany, belongsTo, SoftDeletes)
+- **Migrations & Seeders** — Veritabanı şeması ve test verileri
+- **Middleware** — Admin erişim kontrolü, güvenlik başlıkları (CSP)
+- **Form Request Validation** — Ayrı Request sınıfları ile doğrulama
+- **Soft Deletes** — Silinen kayıtlar geri alınabilir
+- **Resource Controllers** — Standart CRUD operasyonları
+- **Named Routes** — Tüm bağlantılar `route()` helper ile
+- **Blade Templating** — `@extends`, `@section`, `@stack`, `@push`
+- **Flash Messages** — SweetAlert2 ile bildirimler
+- **File Storage** — Avatar yüklemeleri
+- **Pagination** — Türkçe sayfalama (Bootstrap 5)
+- **Vite** — CSS ve JS varlık derleme
+
+---
 
 ## Lisans
 
