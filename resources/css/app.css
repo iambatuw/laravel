@@ -1,302 +1,433 @@
-/* Import Bootstrap from node_modules if using Vite, but for now we can just put our custom styles here */
+/* =============================================
+   Nöbet Kontrol Sistemi - Ana Stil Dosyası
+   Font: Inter | Tema: Koyu
+   ============================================= */
+
 :root {
-    --primary-gradient: linear-gradient(135deg, rgb(79, 70, 229) 0%, rgb(147, 51, 234) 100%);
-    --background-dark: rgb(15, 23, 42);
-    --sidebar-bg: rgb(30, 41, 59);
-    --card-bg: rgb(44, 56, 74);
-    --navbar-bg: rgba(15, 23, 42, 0.95);
-    --sidebar-hover: rgba(255, 255, 255, 0.05);
-    --text-main: rgb(248, 250, 252);
-    --text-muted: rgb(170, 185, 205);
-    --border-color: rgba(15, 23, 42, 1);
-    --glass-bg: rgba(255, 255, 255, 0.02);
-    --border-radius: 18px;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --bg-base: #0b0f1a;
+    --bg-surface: #111827;
+    --bg-card: #1e293b;
+    --bg-elevated: #1e293b;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-light: rgba(255, 255, 255, 0.1);
+    --text: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --radius: 12px;
+    --radius-lg: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--background-dark) !important;
-    color: var(--text-main) !important;
+    font-family: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
+    background: var(--bg-base) !important;
+    color: var(--text) !important;
     min-height: 100vh;
     overflow-x: hidden;
     display: flex;
-    font-size: 13px;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Sidebar Modern Görünüm */
+/* =============================================
+   Kenar Çubuğu (Sidebar)
+   ============================================= */
 .sidebar {
-    width: 250px;
+    width: 260px;
     height: 100vh;
-    background: var(--sidebar-bg);
-    border-right: 1px solid rgba(255,255,255,0.05);
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border);
     position: fixed;
     left: 0;
     top: 0;
     z-index: 1001;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s ease;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .sidebar-menu {
-    padding: 5px 12px;
+    padding: 20px 14px 14px;
 }
 
 .menu-label {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-muted);
     text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    padding: 15px 12px 8px;
-    opacity: 0.4;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 16px 12px 8px;
 }
 
 .sidebar-link {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 15px;
-    color: var(--text-muted);
+    padding: 10px 14px;
+    color: var(--text-secondary);
     text-decoration: none;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s;
-    margin-bottom: 3px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    margin-bottom: 2px;
 }
 
 .sidebar-link:hover {
-    color: var(--text-main);
-    background: var(--sidebar-hover);
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .sidebar-link.active {
     background: var(--primary-gradient);
     color: #fff;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
-.sidebar-link i { font-size: 18px; width: 22px; text-align: center; }
+.sidebar-link i {
+    font-size: 17px;
+    width: 22px;
+    text-align: center;
+    flex-shrink: 0;
+}
 
-/* Ana İçerik Alanı */
+/* =============================================
+   Üst Çubuk (Navbar)
+   ============================================= */
 .main-wrapper {
     flex: 1;
-    margin-left: 250px;
-    transition: all 0.4s ease;
+    margin-left: 260px;
+    transition: margin 0.3s ease;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
 .top-navbar {
-    height: 75px;
-    background: var(--navbar-bg);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    height: 64px;
+    background: var(--bg-base);
+    border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 1000;
-    padding: 0 30px;
+    padding: 0 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    backdrop-filter: blur(12px);
 }
 
 .page-header h1 {
-    font-size: 22px;
-    font-weight: 800;
+    font-size: 18px;
+    font-weight: 700;
     margin: 0;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
 }
 
 .user-pill {
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    padding: 6px 8px 6px 16px;
-    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 5px 8px 5px 16px;
+    border-radius: var(--radius);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: background 0.15s;
 }
+.user-pill:hover { background: rgba(255, 255, 255, 0.05); }
 
 .avatar-box, .user-avatar {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     background: var(--primary-gradient);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
+    font-weight: 700;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     flex-shrink: 0;
-    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
 }
 
+/* =============================================
+   İçerik Alanı
+   ============================================= */
 .content-body {
-    padding: 30px;
+    padding: 28px;
     flex: 1;
 }
 
-/* Kartlar ve Tablolar */
+/* =============================================
+   Kartlar
+   ============================================= */
 .card {
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow) !important;
     overflow: hidden;
-    background: linear-gradient(145deg, rgba(44, 56, 74, 1) 0%, rgba(30, 41, 59, 1) 100%) !important;
 }
 
+.card-header {
+    background: rgba(0, 0, 0, 0.12) !important;
+    border-bottom: 1px solid var(--border) !important;
+    color: var(--text);
+    padding: 16px 20px;
+}
+
+.card-body { color: var(--text); }
+
+/* =============================================
+   Tablolar
+   ============================================= */
 .table {
-    color: var(--text-main) !important;
-    border-color: var(--border-color) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
     background: transparent !important;
+    font-size: 13px;
 }
 
 .table thead th {
-    padding: 20px 30px;
-    background: rgba(0, 0, 0, 0.2) !important;
+    padding: 14px 20px;
+    background: rgba(0, 0, 0, 0.15) !important;
     color: var(--text-muted) !important;
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid var(--border-color) !important;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid var(--border) !important;
+    white-space: nowrap;
 }
 
 .table td {
-    padding: 24px 30px;
-    border-bottom: 1px solid var(--border-color) !important;
-    color: var(--text-main) !important;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border) !important;
+    color: var(--text) !important;
     background: transparent !important;
+    vertical-align: middle;
 }
 
+.table tbody tr {
+    transition: background 0.1s;
+}
 .table tbody tr:hover td {
     background: rgba(255, 255, 255, 0.02) !important;
 }
 
+/* =============================================
+   Başlıklar
+   ============================================= */
 h1, h2, h3, h4, h5, h6 { color: #fff !important; }
 
-/* Pagination Styles */
-.pagination { gap: 8px; margin-top: 20px; }
+/* =============================================
+   Sayfalama (Pagination)
+   ============================================= */
+.pagination { gap: 4px; margin-top: 16px; }
 .page-link {
-    background: var(--sidebar-bg) !important;
-    border-color: var(--border-color) !important;
-    color: white !important;
-    border-radius: 12px !important;
-    padding: 12px 22px;
-    font-weight: 700;
-    transition: all 0.3s;
-    font-size: 14px;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-secondary) !important;
+    border-radius: 8px !important;
+    padding: 8px 14px;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.15s;
 }
 .page-item.active .page-link {
     background: var(--primary-gradient) !important;
     border-color: transparent !important;
-    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+    color: #fff !important;
 }
-.page-link:hover { background: var(--sidebar-hover) !important; transform: translateY(-2px); }
-.page-item.disabled .page-link { opacity: 0.3; cursor: not-allowed; }
+.page-link:hover {
+    background: rgba(255,255,255,0.06) !important;
+    color: #fff !important;
+}
+.page-item.disabled .page-link {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
 
-label { color: rgba(255,255,255,0.9) !important; font-weight: 700; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+/* =============================================
+   Formlar
+   ============================================= */
+label {
+    color: var(--text-secondary) !important;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
 
 .form-control, .form-select {
-    background-color: rgba(15, 23, 42, 0.6) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: #fff !important;
-    border-radius: 14px !important;
-    padding: 14px 20px !important;
-    transition: all 0.3s !important;
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid var(--border-light) !important;
+    color: var(--text) !important;
+    border-radius: 10px !important;
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    transition: border-color 0.15s, box-shadow 0.15s !important;
 }
 .form-control:focus, .form-select:focus {
-    background-color: rgba(15, 23, 42, 0.8) !important;
-    border-color: rgb(79, 70, 229) !important;
-    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2) !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
 }
-.form-control::placeholder { color: rgba(255,255,255,0.3) !important; }
+.form-control::placeholder { color: var(--text-muted) !important; }
 
-/* Pagination Summary Text */
-.text-muted, .small { color: rgba(255,255,255,0.4) !important; }
-.data-summary { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
-
-.footer {
-    padding: 30px 40px;
-    border-top: 1px solid var(--border-color);
-    background: rgba(0,0,0,0.2);
-    text-align: center;
-    font-size: 14px;
-    color: var(--text-muted);
+.form-check-input {
+    background-color: rgba(255,255,255,0.06) !important;
+    border-color: var(--border-light) !important;
+}
+.form-check-input:checked {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
 }
 
-@media (max-width: 992px) {
-    .sidebar { transform: translateX(-100%); }
-    .sidebar.active { transform: translateX(0); }
-    .main-wrapper { margin-left: 0; }
+.input-group-text {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid var(--border-light) !important;
+    color: var(--primary-light) !important;
 }
 
-.menu-toggle {
-    width: 48px;
-    height: 48px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: var(--glass-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
-    color: white;
-    cursor: pointer;
-}
-@media (max-width: 992px) { .menu-toggle { display: flex; } }
+/* =============================================
+   Metin Yardımcıları
+   ============================================= */
+.text-muted { color: var(--text-muted) !important; }
+.text-white { color: #fff !important; }
+.text-white-50 { color: rgba(255,255,255,0.5) !important; }
+.fw-black { font-weight: 900; }
+.small { font-size: 0.85em !important; }
 
-/* Dropdown Dark Theme Override */
+/* =============================================
+   Açılır Menüler (Dropdown)
+   ============================================= */
 .dropdown-menu,
 .dropdown-menu.bg-dark,
 ul.dropdown-menu {
-    background-color: rgb(30, 41, 59) !important;
-    background: rgb(30, 41, 59) !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
-    padding: 8px !important;
+    background: var(--bg-elevated) !important;
+    border: 1px solid var(--border-light) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow-lg) !important;
+    padding: 6px !important;
 }
 .dropdown-menu .dropdown-item {
-    color: rgba(255,255,255,0.8) !important;
-    border-radius: 10px !important;
-    transition: all 0.2s ease;
+    color: var(--text-secondary) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    font-size: 13px;
+    transition: all 0.1s;
 }
 .dropdown-menu .dropdown-item:hover,
 .dropdown-menu .dropdown-item:focus {
-    background: rgba(255,255,255,0.08) !important;
+    background: rgba(255,255,255,0.06) !important;
     color: #fff !important;
 }
 .dropdown-menu .dropdown-divider {
-    border-color: rgba(255,255,255,0.1) !important;
+    border-color: var(--border) !important;
+    margin: 4px 0 !important;
 }
 
-/* Input Group Dark Theme */
-.input-group-text {
-    background: rgba(255,255,255,0.05) !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    color: rgb(99, 102, 241) !important;
+/* =============================================
+   Düğmeler
+   ============================================= */
+.btn-primary {
+    background: var(--primary-gradient) !important;
+    border: none !important;
+    font-weight: 600;
+}
+.btn-primary:hover {
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
 }
 
-/* Empty State */
+.btn-primary-gradient {
+    background: var(--primary-gradient) !important;
+    border: none !important;
+    color: #fff !important;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: all 0.15s;
+}
+.btn-primary-gradient:hover {
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+    color: #fff !important;
+}
+
+.btn-outline-secondary {
+    border-color: var(--border-light) !important;
+    color: var(--text-secondary) !important;
+}
+.btn-outline-secondary:hover {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: #fff !important;
+}
+
+.btn-outline-primary {
+    border-color: rgba(99, 102, 241, 0.3) !important;
+    color: var(--primary-light) !important;
+}
+.btn-outline-primary:hover {
+    background: rgba(99, 102, 241, 0.1) !important;
+    color: #fff !important;
+}
+
+.btn-outline-danger {
+    border-color: rgba(239, 68, 68, 0.3) !important;
+    color: #f87171 !important;
+}
+.btn-outline-danger:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #fff !important;
+}
+
+.btn-dark {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+}
+.btn-dark:hover {
+    background: rgba(255,255,255,0.08) !important;
+}
+
+/* =============================================
+   Uyarılar (Alerts)
+   ============================================= */
+.alert-warning {
+    background: rgba(245, 158, 11, 0.08) !important;
+    border: 1px solid rgba(245, 158, 11, 0.15) !important;
+    color: #fbbf24 !important;
+}
+.alert-success {
+    background: rgba(16, 185, 129, 0.08) !important;
+    border: 1px solid rgba(16, 185, 129, 0.15) !important;
+    color: #34d399 !important;
+}
+.alert-danger {
+    background: rgba(239, 68, 68, 0.08) !important;
+    border: 1px solid rgba(239, 68, 68, 0.15) !important;
+    color: #f87171 !important;
+}
+
+/* =============================================
+   Boş Durum (Empty State)
+   ============================================= */
 .empty-state {
     text-align: center;
-    padding: 40px 20px;
+    padding: 48px 20px;
     color: var(--text-muted);
 }
 .empty-state i {
     font-size: 48px;
-    opacity: 0.15;
+    opacity: 0.12;
     margin-bottom: 16px;
 }
 .empty-state h5 {
@@ -304,69 +435,57 @@ ul.dropdown-menu {
     font-weight: 600;
 }
 
-/* Sidebar Top Padding */
-.sidebar-menu { padding-top: 20px; }
+/* =============================================
+   Alt Bilgi (Footer)
+   ============================================= */
+.footer {
+    padding: 20px 28px;
+    border-top: 1px solid var(--border);
+    background: transparent;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+}
 
-/* Badge spacing fix */
+/* =============================================
+   Kenarlık Yardımcıları
+   ============================================= */
+.border-top { border-color: var(--border) !important; }
+.border-bottom { border-color: var(--border) !important; }
+
+/* =============================================
+   Rozet (Badge)
+   ============================================= */
 .badge i { margin-right: 4px; }
 
-/* Button group fix */
-.btn-group { gap: 4px; }
-
-/* Gradient Button */
-.btn-primary-gradient {
-    background: var(--primary-gradient) !important;
-    border: none !important;
-    color: #fff !important;
-    font-weight: 700;
-    padding: 10px 24px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-    transition: all 0.3s;
-}
-.btn-primary-gradient:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
-    color: #fff !important;
+/* =============================================
+   Duyarlı Tasarım (Responsive)
+   ============================================= */
+@media (max-width: 992px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.active { transform: translateX(0); }
+    .main-wrapper { margin-left: 0; }
+    .content-body { padding: 20px 16px; }
 }
 
-/* Card header dark theme */
-.card-header {
-    background: rgba(0, 0, 0, 0.15) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    color: #fff;
+.menu-toggle {
+    width: 40px;
+    height: 40px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.15s;
 }
+.menu-toggle:hover { background: rgba(255,255,255,0.08); }
+@media (max-width: 992px) { .menu-toggle { display: flex; } }
 
-/* Alert dark theme */
-.alert-warning {
-    background: rgba(245, 158, 11, 0.1) !important;
-    border: 1px solid rgba(245, 158, 11, 0.2) !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-/* Border top/bottom fixes */
-.border-top { border-color: rgba(255, 255, 255, 0.1) !important; }
-
-/* btn-outline-secondary dark fix */
-.btn-outline-secondary {
-    border-color: rgba(255, 255, 255, 0.15) !important;
-    color: rgba(255, 255, 255, 0.6) !important;
-}
-.btn-outline-secondary:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: #fff !important;
-}
-
-/* btn-outline-primary dark fix */
-.btn-outline-primary {
-    border-color: rgba(79, 70, 229, 0.4) !important;
-    color: rgb(99, 102, 241) !important;
-}
-.btn-outline-primary:hover {
-    background: rgba(79, 70, 229, 0.15) !important;
-    color: #fff !important;
-}
-
-/* Text visibility helpers */
-.text-white { color: #fff !important; }
-.fw-black { font-weight: 900; }
+/* =============================================
+   Özel Geçiş (Transition)
+   ============================================= */
+.transition-hover { transition: all 0.15s ease; }
+.transition-hover:hover { background: rgba(255,255,255,0.04) !important; }

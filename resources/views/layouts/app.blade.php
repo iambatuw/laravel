@@ -7,10 +7,9 @@
     <meta name="description" content="Nöbetçi Öğretmen Takip Sistemi - Güvenli ve Dijital Yönetim Paneli">
     <title>@yield('title', 'Nöbet Kontrol v2.0')</title>
 
-    <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Bootstrap 5 & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -26,9 +25,16 @@
 </head>
 <body>
 
-    <!-- Sidebar -->
     <aside class="sidebar" id="mainSidebar">
-
+        <div class="px-4 py-3 d-flex align-items-center gap-3" style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                <i class="bi bi-mortarboard-fill text-white" style="font-size:18px;"></i>
+            </div>
+            <div>
+                <div class="text-white fw-bold" style="font-size:14px;letter-spacing:-0.3px;">Nöbet Kontrol</div>
+                <div style="font-size:10px;color:#64748b;font-weight:600;">Yönetim Sistemi</div>
+            </div>
+        </div>
         <nav class="sidebar-menu">
             <div class="menu-label">Ana Panel</div>
             <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
@@ -119,10 +125,8 @@
             @yield('content')
         </div>
 
-        <footer class="footer py-4 mt-auto">
-            <div class="text-white-50 opacity-50 small fw-bold" style="letter-spacing: 0.5px;">
-                © {{ date('Y') }} Nöbet Kontrol Sistemi
-            </div>
+        <footer class="footer mt-auto">
+            © {{ date('Y') }} Nöbet Kontrol Sistemi
         </footer>
     </div>
 

@@ -150,7 +150,7 @@
             <div class="card mt-4 border-0" style="background: var(--primary-gradient);">
                 <div class="card-body p-4">
                     <h6 class="text-white fw-bold mb-2">Yardıma mı ihtiyacınız var?</h6>
-                    <p class="text-white text-opacity-75 small mb-3">Nöbet değişiklikleri veya sistem kullanımı hakkında bilgi almak için admin ile iletişime geçebilirsiniz.</p>
+                    <p class="text-white text-opacity-75 small mb-3">Nöbet değişiklikleri veya sistem kullanımı hakkında bilgi almak için yönetici ile iletişime geçebilirsiniz.</p>
                     <a href="mailto:admin@okul.edu.tr" class="btn btn-white btn-sm bg-white text-primary border-0 fw-bold px-3">E-posta Gönder</a>
                 </div>
             </div>

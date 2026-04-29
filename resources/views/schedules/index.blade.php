@@ -60,7 +60,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center gap-3">
-                                            <div class="px-2 py-1 rounded bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25" style="font-size: 9px; font-weight: 800; letter-spacing: 0.5px;">ADMIN</div>
+                                            <div class="px-2 py-1 rounded bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25" style="font-size: 9px; font-weight: 800; letter-spacing: 0.5px;">YÖNETİCİ</div>
                                             <div class="text-white fw-bold small opacity-75">{{ $schedule->creator->name ?? 'Sistem' }}</div>
                                         </div>
                                     </td>
