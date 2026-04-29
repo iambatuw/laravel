@@ -203,16 +203,18 @@
                             </select>
                         </div>
 
-                        <div class="row g-2 mb-5">
+                        <div class="row g-2 mb-5" id="customTimeArea" style="display:none;">
                             <div class="col-6">
                                 <label class="form-label text-white-50 small fw-bold text-uppercase">Başlangıç</label>
-                                <input type="time" class="form-control border-0 bg-dark text-white py-3 shadow-sm" id="st-time" name="start_time" value="08:00">
+                                <input type="time" class="form-control border-0 bg-dark text-white py-3 shadow-sm" id="st-time" value="08:00">
                             </div>
                             <div class="col-6">
                                 <label class="form-label text-white-50 small fw-bold text-uppercase">Bitiş</label>
-                                <input type="time" class="form-control border-0 bg-dark text-white py-3 shadow-sm" id="en-time" name="end_time" value="11:30">
+                                <input type="time" class="form-control border-0 bg-dark text-white py-3 shadow-sm" id="en-time" value="11:30">
                             </div>
                         </div>
+                        <input type="hidden" name="start_time" id="hiddenStart" value="08:00">
+                        <input type="hidden" name="end_time" id="hiddenEnd" value="11:30">
 
                         <button type="submit" class="btn btn-primary w-100 py-3 rounded-4 shadow border-0 fw-bold">
                             Listeye Ekle <i class="bi bi-plus-lg ms-1"></i>
@@ -232,11 +234,35 @@
         const stInput = document.getElementById('st-time');
         const enInput = document.getElementById('en-time');
 
+        const hiddenStart = document.getElementById('hiddenStart');
+        const hiddenEnd = document.getElementById('hiddenEnd');
+        const customArea = document.getElementById('customTimeArea');
+
+        const presets = {
+            morning:   { start: '08:00', end: '11:30' },
+            noon:      { start: '11:30', end: '13:30' },
+            afternoon: { start: '13:30', end: '17:20' }
+        };
+
         pdSelect.addEventListener('change', function() {
-            if (this.value === 'morning') { stInput.value = '08:00'; enInput.value = '11:30'; }
-            else if (this.value === 'noon') { stInput.value = '11:30'; enInput.value = '13:30'; }
-            else if (this.value === 'afternoon') { stInput.value = '13:30'; enInput.value = '17:20'; }
+            if (this.value === 'custom') {
+                customArea.style.display = '';
+                hiddenStart.value = stInput.value;
+                hiddenEnd.value = enInput.value;
+            } else {
+                customArea.style.display = 'none';
+                const t = presets[this.value];
+                if (t) {
+                    hiddenStart.value = t.start;
+                    hiddenEnd.value = t.end;
+                    stInput.value = t.start;
+                    enInput.value = t.end;
+                }
+            }
         });
+
+        stInput.addEventListener('change', function() { hiddenStart.value = this.value; });
+        enInput.addEventListener('change', function() { hiddenEnd.value = this.value; });
 
         // PDF Export Logic
         document.getElementById('exportPdfBtn').addEventListener('click', function() {

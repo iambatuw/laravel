@@ -217,16 +217,28 @@
                             </select>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label class="form-label text-white-50 small fw-bold text-uppercase" style="font-size: 10px;">Nöbet Periyodu</label>
                             <select name="period" id="quickPeriod" class="form-select bg-dark border-0 text-white py-2 shadow-sm" style="font-size: 13px;" required>
                                 <option value="morning">Sabah (08:00 - 11:30)</option>
                                 <option value="afternoon">Öğle (11:30 - 13:30)</option>
                                 <option value="evening">İkindi (13:30 - 17:20)</option>
+                                <option value="custom">Manuel / Özel</option>
                             </select>
-                            <input type="hidden" name="start_time" id="quickStartTime" value="08:00">
-                            <input type="hidden" name="end_time" id="quickEndTime" value="11:30">
                         </div>
+
+                        <div class="row g-2 mb-4" id="customTimeRow" style="display:none;">
+                            <div class="col-6">
+                                <label class="form-label text-white-50 small fw-bold text-uppercase" style="font-size: 10px;">Başlangıç</label>
+                                <input type="time" id="quickStartTimeInput" class="form-control bg-dark border-0 text-white py-2 shadow-sm" value="08:00" style="font-size: 13px;">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label text-white-50 small fw-bold text-uppercase" style="font-size: 10px;">Bitiş</label>
+                                <input type="time" id="quickEndTimeInput" class="form-control bg-dark border-0 text-white py-2 shadow-sm" value="11:30" style="font-size: 13px;">
+                            </div>
+                        </div>
+                        <input type="hidden" name="start_time" id="quickStartTime" value="08:00">
+                        <input type="hidden" name="end_time" id="quickEndTime" value="11:30">
 
                         <button type="submit" class="btn btn-primary w-100 py-2 rounded-3 shadow-lg border-0 fw-bold small">
                             Hemen Görevlendir
@@ -279,17 +291,35 @@
 
 @push('scripts')
 <script>
-    document.getElementById('quickPeriod')?.addEventListener('change', function() {
-        const times = {
-            morning:   { start: '08:00', end: '11:30' },
-            afternoon: { start: '11:30', end: '13:30' },
-            evening:   { start: '13:30', end: '17:20' }
-        };
-        const t = times[this.value];
-        if (t) {
-            document.getElementById('quickStartTime').value = t.start;
-            document.getElementById('quickEndTime').value = t.end;
+    const periodSelect = document.getElementById('quickPeriod');
+    const customRow = document.getElementById('customTimeRow');
+    const startHidden = document.getElementById('quickStartTime');
+    const endHidden = document.getElementById('quickEndTime');
+    const startInput = document.getElementById('quickStartTimeInput');
+    const endInput = document.getElementById('quickEndTimeInput');
+
+    const presets = {
+        morning:   { start: '08:00', end: '11:30' },
+        afternoon: { start: '11:30', end: '13:30' },
+        evening:   { start: '13:30', end: '17:20' }
+    };
+
+    periodSelect?.addEventListener('change', function() {
+        if (this.value === 'custom') {
+            customRow.style.display = '';
+            startHidden.value = startInput.value;
+            endHidden.value = endInput.value;
+        } else {
+            customRow.style.display = 'none';
+            const t = presets[this.value];
+            if (t) {
+                startHidden.value = t.start;
+                endHidden.value = t.end;
+            }
         }
     });
+
+    startInput?.addEventListener('change', function() { startHidden.value = this.value; });
+    endInput?.addEventListener('change', function() { endHidden.value = this.value; });
 </script>
 @endpush
