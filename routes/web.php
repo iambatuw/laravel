@@ -82,10 +82,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/nobet-cizelgeleri/{schedule}/yazdir', [DutyScheduleController::class, 'printSchedule'])->name('schedules.print');
 
         // Nobet Atamalari
+        Route::get('/nobet-atamalari', [DutyAssignmentController::class, 'index'])->name('assignments.index');
         Route::post('/nobet-atamalari', [DutyAssignmentController::class, 'store'])->name('assignments.store');
+        Route::post('/nobet-atamalari/csv-import', [DutyAssignmentController::class, 'csvImport'])->name('assignments.csv-import');
         Route::patch('/nobet-atamalari/{assignment}', [DutyAssignmentController::class, 'update'])->name('assignments.update');
         Route::delete('/nobet-atamalari/{assignment}', [DutyAssignmentController::class, 'destroy'])->name('assignments.destroy');
         Route::get('/ogretmen-gecmisi/{teacher}', [DutyAssignmentController::class, 'teacherHistory'])->name('assignments.teacher_history');
+
+        // Nobet Yerleri CSV Import
+        Route::post('/nobet-yerleri/csv-import', [LocationController::class, 'csvImport'])->name('locations.csv-import');
 
         // Takas Talep Onay/Red
         Route::patch('/takas-talepleri/{swapRequest}/onayla', [SwapRequestController::class, 'approve'])->name('swap-requests.approve');

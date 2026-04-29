@@ -5,9 +5,55 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLocationRequest;
 use App\Http\Requests\UpdateLocationRequest;
 use App\Models\Location;
+use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
+    public function csvImport(Request $request)
+    {
+        $request->validate([
+            'csv_file' => ['required', 'file', 'mimes:csv,txt', 'max:2048'],
+        ], [
+            'csv_file.required' => 'CSV dosyası seçmelisiniz.',
+            'csv_file.mimes' => 'Dosya CSV formatında olmalıdır.',
+        ]);
+
+        $file = $request->file('csv_file');
+        $rows = array_map('str_getcsv', file($file->getRealPath()));
+        $header = array_map('trim', array_shift($rows));
+
+        $imported = 0;
+        $skipped = 0;
+
+        foreach ($rows as $row) {
+            if (count($row) < count($header)) continue;
+
+            $data = array_combine($header, array_map('trim', $row));
+            $name = $data['ad'] ?? $data['name'] ?? '';
+
+            if (empty($name)) continue;
+
+            if (Location::where('name', $name)->exists()) {
+                $skipped++;
+                continue;
+            }
+
+            Location::create([
+                'name' => $name,
+                'floor' => $data['kat'] ?? $data['floor'] ?? null,
+                'description' => $data['aciklama'] ?? $data['description'] ?? null,
+                'capacity' => $data['kapasite'] ?? $data['capacity'] ?? null,
+                'is_active' => true,
+            ]);
+            $imported++;
+        }
+
+        $msg = "{$imported} nöbet yeri başarıyla eklendi.";
+        if ($skipped > 0) $msg .= " {$skipped} adet zaten mevcut olduğu için atlandı.";
+
+        return redirect()->route('locations.index')->with($imported > 0 ? 'success' : 'error', $msg);
+    }
+
     public function index()
     {
         $locations = Location::withCount('dutyAssignments')

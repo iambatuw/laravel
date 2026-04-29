@@ -63,6 +63,11 @@
                     <i class="bi bi-layers-fill"></i>
                     <span>Çizelge Planlama</span>
                 </a>
+
+                <a href="{{ route('assignments.index') }}" class="sidebar-link {{ request()->routeIs('assignments.*') ? 'active' : '' }}">
+                    <i class="bi bi-list-check"></i>
+                    <span>Nöbet Atamaları</span>
+                </a>
             @endif
 
             <div class="menu-label">Sistem & Profil</div>

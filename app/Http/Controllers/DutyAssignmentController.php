@@ -4,11 +4,93 @@ namespace App\Http\Controllers;
 
 use App\Models\DutyAssignment;
 use App\Models\DutySchedule;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class DutyAssignmentController extends Controller
 {
+    public function index()
+    {
+        $assignments = DutyAssignment::with(['teacher', 'location', 'dutySchedule'])
+            ->latest('id')
+            ->paginate(20);
+
+        $teachers = User::orderBy('name')->get();
+        $locations = Location::active()->orderBy('name')->get();
+        $schedules = DutySchedule::orderByDesc('date')->get();
+
+        return view('assignments.index', compact('assignments', 'teachers', 'locations', 'schedules'));
+    }
+
+    public function csvImport(Request $request)
+    {
+        $request->validate([
+            'csv_file' => ['required', 'file', 'mimes:csv,txt', 'max:2048'],
+            'duty_schedule_id' => ['required', 'exists:duty_schedules,id'],
+        ], [
+            'csv_file.required' => 'CSV dosyası seçmelisiniz.',
+            'csv_file.mimes' => 'Dosya CSV formatında olmalıdır.',
+            'duty_schedule_id.required' => 'Çizelge seçimi zorunludur.',
+        ]);
+
+        $file = $request->file('csv_file');
+        $rows = array_map('str_getcsv', file($file->getRealPath()));
+        $header = array_map('trim', array_shift($rows));
+
+        $imported = 0;
+        $errors = [];
+
+        foreach ($rows as $i => $row) {
+            if (count($row) < count($header)) continue;
+
+            $data = array_combine($header, array_map('trim', $row));
+            $line = $i + 2;
+
+            $teacher = User::where('name', $data['ogretmen'] ?? '')->first();
+            if (!$teacher) {
+                $errors[] = "Satır {$line}: \"{$data['ogretmen']}\" adlı öğretmen bulunamadı.";
+                continue;
+            }
+
+            $location = Location::where('name', $data['nobet_yeri'] ?? '')->first();
+            if (!$location) {
+                $errors[] = "Satır {$line}: \"{$data['nobet_yeri']}\" adlı nöbet yeri bulunamadı.";
+                continue;
+            }
+
+            $period = $data['periyot'] ?? 'morning';
+            $periodMap = ['sabah' => 'morning', 'ogle' => 'noon', 'ikindi' => 'afternoon'];
+            $period = $periodMap[mb_strtolower($period)] ?? $period;
+
+            $times = [
+                'morning'   => ['08:00', '11:30'],
+                'noon'      => ['11:30', '13:30'],
+                'afternoon' => ['13:30', '17:20'],
+            ];
+
+            $startTime = $data['baslangic'] ?? ($times[$period][0] ?? '08:00');
+            $endTime = $data['bitis'] ?? ($times[$period][1] ?? '11:30');
+
+            DutyAssignment::create([
+                'duty_schedule_id' => $request->duty_schedule_id,
+                'user_id' => $teacher->id,
+                'location_id' => $location->id,
+                'period' => $period,
+                'start_time' => $startTime,
+                'end_time' => $endTime,
+            ]);
+            $imported++;
+        }
+
+        $msg = "{$imported} atama başarıyla içe aktarıldı.";
+        if (!empty($errors)) {
+            $msg .= ' ' . count($errors) . ' satırda hata oluştu: ' . implode(' | ', array_slice($errors, 0, 5));
+        }
+
+        return redirect()->route('assignments.index')->with($imported > 0 ? 'success' : 'error', $msg);
+    }
+
     public function store(Request $request)
     {
         $rules = [
