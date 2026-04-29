@@ -109,6 +109,15 @@ class DutyScheduleController extends Controller
             ->with('success', 'Nöbet çizelgesi yayınlandı.');
     }
 
+    // Çizelgeyi yazdır/PDF olarak indir
+    public function print(DutySchedule $schedule)
+    {
+        $schedule->load(['assignments.teacher', 'assignments.location', 'creator']);
+        $groupedAssignments = $schedule->assignments->groupBy('period');
+
+        return view('schedules.print', compact('schedule', 'groupedAssignments'));
+    }
+
     // Bugünün çizelgesini göster
     public function today()
     {

@@ -18,10 +18,10 @@
                         <h4 class="fw-bold mb-1 text-white">{{ $schedule->title ?? $schedule->date->format('d.m.Y') . ' Nöbet Çizelgesi' }}</h4>
                         <div class="d-flex flex-wrap gap-3 align-items-center mt-1">
                             <span class="badge bg-dark border border-secondary text-light px-3 py-1" style="font-size: 11px;">
-                                <i class="bi bi-calendar me-1"></i> {{ $schedule->date->format('d.m.Y') }}
+                                <i class="bi bi-calendar me-2"></i> {{ $schedule->date->format('d.m.Y') }}
                             </span>
                             <span class="badge bg-dark border border-secondary text-light px-3 py-1" style="font-size: 11px;">
-                                <i class="bi bi-person me-1"></i> {{ $schedule->creator->name ?? 'Sistem' }}
+                                <i class="bi bi-person me-2"></i> {{ $schedule->creator->name ?? 'Sistem' }}
                             </span>
                             @php
                                 $stCls = $schedule->status === 'published' ? 'bg-success' : ($schedule->status === 'draft' ? 'bg-warning text-dark' : 'bg-info');
@@ -34,9 +34,9 @@
                 </div>
                 
                 <div class="d-flex flex-wrap gap-2">
-                    <button id="exportPdfBtn" class="btn btn-primary d-flex align-items-center gap-2 px-4 shadow-lg border-0">
+                    <a href="{{ route('schedules.print', $schedule) }}" target="_blank" class="btn btn-primary d-flex align-items-center gap-2 px-4 shadow-lg border-0">
                         <i class="bi bi-file-earmark-pdf-fill"></i> PDF Olarak İndir
-                    </button>
+                    </a>
                     
                     @if($schedule->isDraft())
                         <form action="{{ route('schedules.publish', $schedule) }}" method="POST">
@@ -53,8 +53,8 @@
                             <i class="bi bi-three-dots-vertical text-white"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
-                            <li><a class="dropdown-item text-light" href="{{ route('schedules.edit', $schedule) }}"><i class="bi bi-pencil me-2"></i>Düzenle</a></li>
-                            <li><a class="dropdown-item text-light" href="{{ route('public.board') }}" target="_blank"><i class="bi bi-display me-2"></i>TV Görünümü</a></li>
+                            <li><a class="dropdown-item text-white" href="{{ route('schedules.edit', $schedule) }}"><i class="bi bi-pencil me-2"></i>Düzenle</a></li>
+                            <li><a class="dropdown-item text-white" href="{{ route('public.board') }}" target="_blank"><i class="bi bi-display me-2"></i>TV Görünümü</a></li>
                         </ul>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="badge border border-secondary text-primary px-3 py-1" style="font-size: 11px;">
-                                                        <i class="bi bi-geo-alt me-1"></i> {{ $assignment->location->name }}
+                                                        <i class="bi bi-geo-alt me-2"></i> {{ $assignment->location->name }}
                                                     </span>
                                                 </td>
                                                 <td class="text-white-50 small">
@@ -142,7 +142,7 @@
                             </div>
                         @else
                             <div class="p-4 text-center text-white-50 small">
-                                <i class="bi bi-dash-circle me-1"></i> Bu periyot için henüz atama yapılmadı.
+                                <i class="bi bi-dash-circle me-2"></i> Bu periyot için henüz atama yapılmadı.
                             </div>
                         @endif
                     </div>

@@ -62,7 +62,7 @@ class DutyAssignmentController extends Controller
                 ->with('error', 'Bu öğretmen bu zaman diliminde zaten görevlendirilmiş.');
         }
 
-        $data = $request->all();
+        $data = $request->only(['user_id', 'location_id', 'period', 'start_time', 'end_time', 'status', 'notes']);
         $data['duty_schedule_id'] = $scheduleId;
 
         DutyAssignment::create($data);

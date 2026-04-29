@@ -278,20 +278,20 @@
 
             <div class="footer-links">
                 <a href="{{ route('public.board') }}"><i class="bi bi-broadcast me-1"></i> Nöbet Panosu</a>
-                <span class="sep">|</span>
-                <span style="font-size: 12px; color: var(--text-muted);">v2.0 Güvenli Erişim</span>
             </div>
         </div>
     </div>
 
     <script>
-        // Sağ tık ve DevTools Koruması
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123) return false;
-            if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false;
-            if(e.ctrlKey && e.keyCode == 85) return false;
-        };
+        // Giriş formu yardımcıları
+        document.querySelectorAll('.form-control-custom').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('i').style.color = 'rgb(99, 102, 241)';
+            });
+            input.addEventListener('blur', function() {
+                this.parentElement.querySelector('i').style.color = 'var(--text-muted)';
+            });
+        });
     </script>
 </body>
 </html>

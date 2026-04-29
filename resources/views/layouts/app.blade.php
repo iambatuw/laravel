@@ -25,20 +25,9 @@
     @stack('styles')
 </head>
 <body>
-    <div id="safety-overlay">
-        <div style="font-size: 120px; margin-bottom: 30px;">🔐</div>
-        <h1 style="font-weight: 900; font-size: 48px; margin-bottom: 20px;">ERİŞİM REDDEDİLDİ</h1>
-        <p style="opacity: 0.6; font-size: 20px; max-width: 600px;">Geliştirici araçlarının (F12) kullanımı güvenlik politikalarımız gereği engellenmiştir. İşlem günlüğe kaydedildi.</p>
-    </div>
 
     <!-- Sidebar -->
     <aside class="sidebar" id="mainSidebar">
-        <div class="sidebar-brand">
-            <div class="brand-icon">
-                <i class="bi bi-shield-lock-fill"></i>
-            </div>
-            <h4>Nöbet Kontrol</h4>
-        </div>
 
         <nav class="sidebar-menu">
             <div class="menu-label">Ana Panel</div>
@@ -132,7 +121,7 @@
 
         <footer class="footer py-4 mt-auto">
             <div class="text-white-50 opacity-50 small fw-bold" style="letter-spacing: 0.5px;">
-                © {{ date('Y') }} Nöbet Kontrol Sistemi | Dijital Yönetim Altyapısı
+                © {{ date('Y') }} Nöbet Kontrol Sistemi
             </div>
         </footer>
     </div>
