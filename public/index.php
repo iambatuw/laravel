@@ -1,5 +1,4 @@
 <?php
-die("Sunucudaki PHP Sürümü: " . PHP_VERSION . " (Gerekli: 8.2+)");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -8,7 +7,8 @@ error_reporting(E_ALL);
 use Illuminate\Http\Request;
 
 if (PHP_VERSION_ID < 80200) {
-    die("HATA: Sunucuda PHP " . PHP_VERSION . " yüklü. Laravel 11 için en az 8.2.0 gereklidir.");
+    http_response_code(500);
+    die("HATA: Sunucuda PHP " . PHP_VERSION . " yüklü. Laravel 11 için en az 8.2.0 gereklidir. Lütfen hosting panelinizden PHP sürümünü 8.2 veya 8.3 yapın.");
 }
 
 define('LARAVEL_START', microtime(true));
