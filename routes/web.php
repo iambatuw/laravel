@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/nobet-cizelgeleri/{schedule}/yazdir', [DutyScheduleController::class, 'printSchedule'])->name('schedules.print');
 
         // Nobet Atamalari
+        Route::get('/nobet-atamalari', fn() => redirect()->route('dashboard'))->name('assignments.index');
         Route::post('/nobet-atamalari', [DutyAssignmentController::class, 'store'])->name('assignments.store');
         Route::post('/nobet-atamalari/csv-import', [DutyAssignmentController::class, 'csvImport'])->name('assignments.csv-import');
         Route::patch('/nobet-atamalari/{assignment}', [DutyAssignmentController::class, 'update'])->name('assignments.update');
