@@ -36,10 +36,10 @@
                                     <button class="btn btn-dark border-0 p-2 rounded-3" data-bs-toggle="dropdown">
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
-                                        <li><a class="dropdown-item text-white" href="{{ route('locations.edit', $location) }}"><i class="bi bi-pencil-square me-2 text-warning"></i> Düzenle</a></li>
-                                        <li><a class="dropdown-item text-white" href="{{ route('locations.show', $location) }}"><i class="bi bi-eye me-2 text-info"></i> Detay</a></li>
-                                        <li><hr class="dropdown-divider opacity-10"></li>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="{{ route('locations.edit', $location) }}"><i class="bi bi-pencil-square me-2 text-warning"></i> Düzenle</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('locations.show', $location) }}"><i class="bi bi-eye me-2 text-info"></i> Detay</a></li>
+                                        <li><hr class="dropdown-divider"></li>
                                         <li>
                                             <form id="del-loc-{{ $location->id }}" action="{{ route('locations.destroy', $location) }}" method="POST">
                                                 @csrf @method('DELETE')

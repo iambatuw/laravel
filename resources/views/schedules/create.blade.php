@@ -21,7 +21,7 @@
                             <div class="col-md-12">
                                 <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Planlama Tarihi</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-dark border-0 text-primary px-4"><i class="bi bi-calendar-check"></i></span>
+                                    <span class="input-group-text border-0 text-primary px-4"><i class="bi bi-calendar-check"></i></span>
                                     <input type="date" class="form-control bg-dark border-0 text-light py-3 @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date', date('Y-m-d')) }}" required>
                                 </div>
                                 @error('date') <div class="invalid-feedback d-block mt-2">{{ $message }}</div> @enderror
@@ -30,7 +30,7 @@
                             <div class="col-md-12">
                                 <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Çizelge Başlığı</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-dark border-0 text-primary px-4"><i class="bi bi-journal-check"></i></span>
+                                    <span class="input-group-text border-0 text-primary px-4"><i class="bi bi-journal-check"></i></span>
                                     <input type="text" class="form-control bg-dark border-0 text-light py-3 @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" placeholder="Örn: 1. Dönem Final Haftası Nöbetleri">
                                 </div>
                                 <div class="form-text text-muted small mt-2">Boş bırakılırsa tarih bilgisi otomatik başlık olarak kullanılır.</div>

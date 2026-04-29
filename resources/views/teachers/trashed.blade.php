@@ -28,10 +28,10 @@
                         <tbody>
                             @foreach($teachers as $teacher)
                                 <tr>
-                                    <td class="fw-semibold">{{ $teacher->name }}</td>
-                                    <td style="color: #666;">{{ $teacher->email }}</td>
-                                    <td>{{ $teacher->branch }}</td>
-                                    <td style="color: #999;">{{ $teacher->deleted_at->format('d.m.Y H:i') }}</td>
+                                    <td class="fw-semibold text-white">{{ $teacher->name }}</td>
+                                    <td class="text-white-50">{{ $teacher->email }}</td>
+                                    <td class="text-white-50">{{ $teacher->branch }}</td>
+                                    <td class="text-white-50">{{ $teacher->deleted_at->format('d.m.Y H:i') }}</td>
                                     <td>
                                         <form action="{{ route('teachers.restore', $teacher->id) }}" method="POST" class="d-inline">
                                             @csrf

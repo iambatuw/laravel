@@ -25,8 +25,6 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(3)->by($request->ip().'|'.(string) $request->input('email'));
         });
 
-        // Pagination Türkçeleştirme
         Paginator::useBootstrapFive();
-        Paginator::defaultView('vendor.pagination.bootstrap-5');
     }
 }

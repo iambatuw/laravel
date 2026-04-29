@@ -49,12 +49,21 @@
                     @endif
                     
                     <div class="dropdown">
-                        <button class="btn btn-dark border-secondary px-3" data-bs-toggle="dropdown">
+                        <button class="btn btn-dark border-secondary px-3" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical text-white"></i>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
-                            <li><a class="dropdown-item text-white" href="{{ route('schedules.edit', $schedule) }}"><i class="bi bi-pencil me-2"></i>Düzenle</a></li>
-                            <li><a class="dropdown-item text-white" href="{{ route('public.board') }}" target="_blank"><i class="bi bi-display me-2"></i>TV Görünümü</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ route('schedules.edit', $schedule) }}"><i class="bi bi-pencil me-2 text-warning"></i>Düzenle</a></li>
+                            <li><a class="dropdown-item" href="{{ route('public.board') }}" target="_blank"><i class="bi bi-display me-2 text-info"></i>TV Görünümü</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form id="del-schedule-{{ $schedule->id }}" action="{{ route('schedules.destroy', $schedule) }}" method="POST">
+                                    @csrf @method('DELETE')
+                                    <button type="button" class="dropdown-item text-danger" onclick="confirmDelete('del-schedule-{{ $schedule->id }}', '{{ $schedule->date->format('d.m.Y') }} Çizelgesi')">
+                                        <i class="bi bi-trash3 me-2"></i>Çizelgeyi Sil
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>

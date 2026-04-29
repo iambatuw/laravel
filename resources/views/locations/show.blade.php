@@ -15,7 +15,7 @@
                     <p class="text-muted mb-3">{{ $location->floor ?? 'Kat belirtilmemiş' }}</p>
 
                     @if($location->description)
-                        <p style="font-size: 13px; color: #777;">{{ $location->description }}</p>
+                        <p class="text-white-50 small">{{ $location->description }}</p>
                     @endif
 
                     <div class="d-flex justify-content-around mt-3 pt-3 border-top">

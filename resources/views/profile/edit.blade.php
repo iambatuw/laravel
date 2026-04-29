@@ -17,10 +17,10 @@
                         @method('PUT')
 
                         <div class="text-center mb-5">
-                            <div class="user-avatar mx-auto mb-3" style="width:80px;height:80px;font-size:32px;border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+                            <div class="user-avatar mx-auto mb-3" style="width:80px;height:80px;font-size:32px;border-radius:20px;">
                                 {{ strtoupper(substr($user->name, 0, 1)) }}
                             </div>
-                            <h5 class="fw-bold text-light mb-1">{{ $user->name }}</h5>
+                            <h5 class="fw-bold mb-1">{{ $user->name }}</h5>
                             <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-pill border border-primary border-opacity-25" style="font-size: 11px;">
                                 {{ $user->isAdmin() ? 'Sistem Yöneticisi' : 'Öğretmen' }}
                             </span>

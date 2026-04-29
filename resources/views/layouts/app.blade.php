@@ -45,7 +45,7 @@
                 <div class="menu-label">Yönetim Birimi</div>
                 <a href="{{ route('teachers.index') }}" class="sidebar-link {{ request()->routeIs('teachers.*') ? 'active' : '' }}">
                     <i class="bi bi-people-fill"></i>
-                    <span class="small fw-bold">Öğretmen Yönetimi</span>
+                    <span>Öğretmen Yönetimi</span>
                 </a>
 
                 <a href="{{ route('locations.index') }}" class="sidebar-link {{ request()->routeIs('locations.*') ? 'active' : '' }}">
@@ -88,20 +88,20 @@
                 <div class="user-pill d-flex align-items-center gap-3" data-bs-toggle="dropdown" style="padding: 6px 10px 6px 20px;">
                     <div class="text-end d-none d-md-block" style="line-height: 1.1;">
                         <div class="fw-black text-white" style="font-size: 14px; letter-spacing: -0.2px;">{{ auth()->user()->name }}</div>
-                        <div class="text-primary fw-black text-uppercase mt-1" style="font-size: 8.5px; letter-spacing: 1px;">{{ auth()->user()->role === 'admin' ? 'SYSTEM ADMIN' : 'TEACHER' }}</div>
+                        <div class="text-primary fw-black text-uppercase mt-1" style="font-size: 8.5px; letter-spacing: 1px;">{{ auth()->user()->role === 'admin' ? 'SİSTEM YÖNETİCİSİ' : 'ÖĞRETMEN' }}</div>
                     </div>
                     <div class="avatar-box shadow-sm border border-white border-opacity-10">
                         {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                     </div>
                 </div>
-                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg p-3" style="background: var(--sidebar-bg); border-radius: 20px; min-width: 250px;">
+                <ul class="dropdown-menu dropdown-menu-end" style="min-width: 250px;">
                     <li>
                         <a class="dropdown-item py-2 px-3 rounded-3 text-light d-flex align-items-center gap-3" href="{{ route('profile.edit') }}">
                             <div class="bg-primary bg-opacity-10 p-2 rounded-2"><i class="bi bi-person-fill text-primary"></i></div>
                             <span>Kişisel Bilgiler</span>
                         </a>
                     </li>
-                    <li><hr class="dropdown-divider opacity-10 my-3"></li>
+                    <li><hr class="dropdown-divider my-2"></li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
