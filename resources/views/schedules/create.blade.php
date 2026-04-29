@@ -22,7 +22,7 @@
                                 <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Planlama Tarihi</label>
                                 <div class="input-group">
                                     <span class="input-group-text border-0 text-primary px-4"><i class="bi bi-calendar-check"></i></span>
-                                    <input type="date" class="form-control bg-dark border-0 text-light py-3 @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date', date('Y-m-d')) }}" required>
+                                    <input type="date" class="form-control bg-dark border-0 text-white py-3 @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date', date('Y-m-d')) }}" required>
                                 </div>
                                 @error('date') <div class="invalid-feedback d-block mt-2">{{ $message }}</div> @enderror
                             </div>
@@ -31,7 +31,7 @@
                                 <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Çizelge Başlığı</label>
                                 <div class="input-group">
                                     <span class="input-group-text border-0 text-primary px-4"><i class="bi bi-journal-check"></i></span>
-                                    <input type="text" class="form-control bg-dark border-0 text-light py-3 @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" placeholder="Örn: 1. Dönem Final Haftası Nöbetleri">
+                                    <input type="text" class="form-control bg-dark border-0 text-white py-3 @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" placeholder="Örn: 1. Dönem Final Haftası Nöbetleri">
                                 </div>
                                 <div class="form-text text-muted small mt-2">Boş bırakılırsa tarih bilgisi otomatik başlık olarak kullanılır.</div>
                                 @error('title') <div class="invalid-feedback d-block mt-2">{{ $message }}</div> @enderror
@@ -39,7 +39,7 @@
 
                             <div class="col-12">
                                 <label class="form-label mb-3 fw-bold small text-muted text-uppercase tracking-wider">Özel Notlar (Opsiyonel)</label>
-                                <textarea class="form-control bg-dark border-0 text-light @error('notes') is-invalid @enderror" id="notes" name="notes" rows="4" placeholder="Nöbetçi öğretmenler için ek açıklamalar veya hatıtmalar...">{{ old('notes') }}</textarea>
+                                <textarea class="form-control bg-dark border-0 text-white @error('notes') is-invalid @enderror" id="notes" name="notes" rows="4" placeholder="Nöbetçi öğretmenler için ek açıklamalar veya hatıtmalar...">{{ old('notes') }}</textarea>
                                 @error('notes') <div class="invalid-feedback d-block mt-2">{{ $message }}</div> @enderror
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             <div class="d-flex gap-3">
                                 <i class="bi bi-info-circle-fill text-primary fs-4"></i>
                                 <div>
-                                    <h6 class="fw-bold mb-1 text-light">Sonraki Adım: Atamalar</h6>
+                                    <h6 class="fw-bold mb-1 text-white">Sonraki Adım: Atamalar</h6>
                                     <p class="text-muted small mb-0">Çizelge taslağı oluşturulduktan sonra öğretmenleri nöbet yerlerine atayabileceksiniz.</p>
                                 </div>
                             </div>

@@ -17,10 +17,10 @@
                     <div>
                         <h4 class="fw-bold mb-1 text-white">{{ $schedule->title ?? $schedule->date->format('d.m.Y') . ' Nöbet Çizelgesi' }}</h4>
                         <div class="d-flex flex-wrap gap-3 align-items-center mt-1">
-                            <span class="badge bg-dark border border-secondary text-light px-3 py-1" style="font-size: 11px;">
+                            <span class="badge bg-dark border border-secondary text-white px-3 py-1" style="font-size: 11px;">
                                 <i class="bi bi-calendar me-2"></i> {{ $schedule->date->format('d.m.Y') }}
                             </span>
-                            <span class="badge bg-dark border border-secondary text-light px-3 py-1" style="font-size: 11px;">
+                            <span class="badge bg-dark border border-secondary text-white px-3 py-1" style="font-size: 11px;">
                                 <i class="bi bi-person me-2"></i> {{ $schedule->creator->name ?? 'Sistem' }}
                             </span>
                             @php
@@ -256,7 +256,7 @@
                 c.style.color = 'black';
                 c.style.border = '1px solid #eee';
             });
-            const textLights = element.querySelectorAll('.text-white, .text-light, .fw-medium, .fw-bold, h6, h5');
+            const textLights = element.querySelectorAll('.text-white, .text-white, .fw-medium, .fw-bold, h6, h5');
             textLights.forEach(t => t.style.color = 'black');
             
             html2pdf().set(opt).from(element).save().then(() => {

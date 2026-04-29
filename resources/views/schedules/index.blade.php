@@ -44,13 +44,13 @@
                                                 <div class="text-uppercase" style="font-size: 9px; color: rgba(255,255,255,0.7); font-weight: 700;">{{ $schedule->date->locale('tr')->shortMonthName }}</div>
                                             </div>
                                             <div>
-                                                <div class="fw-bold text-light">{{ $schedule->day_of_week }}</div>
+                                                <div class="fw-bold text-white">{{ $schedule->day_of_week }}</div>
                                                 <div class="text-muted small">{{ $schedule->date->format('d.m.Y') }}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="text-light fw-bold mb-1">{{ $schedule->title }}</div>
+                                        <div class="text-white fw-bold mb-1">{{ $schedule->title }}</div>
                                         <div class="text-muted small opacity-75">Haftalık rutin nöbet çizelgesi</div>
                                     </td>
                                     <td class="text-center">
@@ -105,7 +105,7 @@
                     <div class="text-muted mb-4 pt-4">
                         <i class="bi bi-calendar-x" style="font-size: 100px; opacity: 0.1;"></i>
                     </div>
-                    <h4 class="text-light fw-bold">Henüz Çizelge Oluşturulmamış</h4>
+                    <h4 class="text-white fw-bold">Henüz Çizelge Oluşturulmamış</h4>
                     <p class="text-muted mb-4">Sisteme ilk nöbet çizelgesini ekleyerek başlayabilirsiniz.</p>
                     <a href="{{ route('schedules.create') }}" class="btn btn-primary px-5 py-3 fw-bold rounded-3">
                         <i class="bi bi-plus-lg me-2"></i> İlk Çizelgeyi Başlat

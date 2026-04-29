@@ -21,7 +21,7 @@
         <div class="card-body p-0">
             @if($swapRequests->count() > 0)
                 <div class="table-responsive">
-                    <table class="table align-middle text-light mb-0">
+                    <table class="table align-middle text-white mb-0">
                         <thead class="bg-dark bg-opacity-25">
                             <tr>
                                 <th class="ps-4">Talep Sahibi</th>
@@ -43,13 +43,13 @@
                                                 {{ strtoupper(substr($swap->requester->name, 0, 1)) }}
                                             </div>
                                             <div>
-                                                <div class="fw-bold text-light">{{ $swap->requester->name }}</div>
+                                                <div class="fw-bold text-white">{{ $swap->requester->name }}</div>
                                                 <div class="text-muted" style="font-size: 11px;">{{ $swap->requester->branch }}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="fw-medium text-light small">{{ $swap->target->name }}</div>
+                                        <div class="fw-medium text-white small">{{ $swap->target->name }}</div>
                                         <div class="text-muted" style="font-size: 10px;">{{ $swap->target->branch }}</div>
                                     </td>
                                     <td>

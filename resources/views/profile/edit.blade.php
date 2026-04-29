@@ -9,7 +9,7 @@
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-transparent border-light border-opacity-10 py-3">
-                    <h5 class="mb-0 fw-bold text-light"><i class="bi bi-person-bounding-box me-2 text-primary"></i>Profil Detayları</h5>
+                    <h5 class="mb-0 fw-bold text-white"><i class="bi bi-person-bounding-box me-2 text-primary"></i>Profil Detayları</h5>
                 </div>
                 <div class="card-body p-4">
                     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
@@ -60,7 +60,7 @@
         <div class="col-lg-5">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-transparent border-light border-opacity-10 py-3">
-                    <h5 class="mb-0 fw-bold text-light"><i class="bi bi-shield-lock me-2 text-primary"></i>Güvenlik Ayarları</h5>
+                    <h5 class="mb-0 fw-bold text-white"><i class="bi bi-shield-lock me-2 text-primary"></i>Güvenlik Ayarları</h5>
                 </div>
                 <div class="card-body p-4">
                     <form action="{{ route('profile.password') }}" method="POST">

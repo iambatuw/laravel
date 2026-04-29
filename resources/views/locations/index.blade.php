@@ -52,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="fw-bold text-light mb-1">{{ $location->name }}</h5>
+                            <h5 class="fw-bold text-white mb-1">{{ $location->name }}</h5>
                             <div class="text-primary small fw-bold mb-3 d-flex align-items-center gap-2">
                                 <i class="bi bi-layers"></i> {{ $location->floor ?? 'Belirtilmedi' }}
                             </div>
@@ -67,11 +67,11 @@
 
                             <div class="d-flex justify-content-between align-items-center pt-3 border-top border-light border-opacity-10">
                                 <div class="text-center">
-                                    <div class="fw-bold text-light" style="font-size: 14px;">{{ $location->capacity }}</div>
+                                    <div class="fw-bold text-white" style="font-size: 14px;">{{ $location->capacity }}</div>
                                     <div class="text-muted extra-small" style="font-size: 9px; text-transform: uppercase;">Kapasite</div>
                                 </div>
                                 <div class="text-center">
-                                    <div class="fw-bold text-light" style="font-size: 14px;">{{ $location->duty_assignments_count }}</div>
+                                    <div class="fw-bold text-white" style="font-size: 14px;">{{ $location->duty_assignments_count }}</div>
                                     <div class="text-muted extra-small" style="font-size: 9px; text-transform: uppercase;">Toplam Atama</div>
                                 </div>
                                 <span class="badge {{ $location->is_active ? 'bg-success' : 'bg-secondary' }} px-2 py-1" style="font-size: 9px;">

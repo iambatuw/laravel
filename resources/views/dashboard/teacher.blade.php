@@ -29,7 +29,7 @@
                                                 <i class="bi bi-geo-alt-fill fs-4"></i>
                                             </div>
                                             <div class="text-end">
-                                                <span class="badge rounded-pill bg-dark border border-secondary text-light mb-1 d-block" style="font-size: 10px;">{{ $duty->period_label }}</span>
+                                                <span class="badge rounded-pill bg-dark border border-secondary text-white mb-1 d-block" style="font-size: 10px;">{{ $duty->period_label }}</span>
                                                 @php
                                                     $sCls = $duty->status === 'completed' ? 'text-success' : ($duty->status === 'absent' ? 'text-danger' : 'text-info');
                                                 @endphp
@@ -38,7 +38,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h5 class="fw-bold text-light mb-2">{{ $duty->location->name }}</h5>
+                                        <h5 class="fw-bold text-white mb-2">{{ $duty->location->name }}</h5>
                                         <p class="text-muted small mb-3"><i class="bi bi-layers me-1"></i> {{ $duty->location->floor ?? 'Zemin Kat' }}</p>
                                         
                                         @if($duty->start_time && $duty->end_time)
@@ -82,7 +82,7 @@
                                     @foreach($upcomingDuties as $duty)
                                         <tr>
                                             <td>
-                                                <div class="fw-bold text-light">{{ $duty->dutySchedule->date->format('d.m.Y') }}</div>
+                                                <div class="fw-bold text-white">{{ $duty->dutySchedule->date->format('d.m.Y') }}</div>
                                                 <div class="text-muted small">{{ $duty->dutySchedule->day_of_week }}</div>
                                             </td>
                                             <td>
@@ -128,7 +128,7 @@
                                     {{ strtoupper(substr($swap->target->name, 0, 1)) }}
                                 </div>
                                 <div class="flex-grow-1 overflow-hidden">
-                                    <div class="fw-semibold text-light text-truncate" style="font-size: 14px;">{{ $swap->target->name }}</div>
+                                    <div class="fw-semibold text-white text-truncate" style="font-size: 14px;">{{ $swap->target->name }}</div>
                                     <div class="text-muted small text-truncate">{{ $swap->dutyAssignment->location->name }}</div>
                                 </div>
                                 @php

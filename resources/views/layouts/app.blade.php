@@ -96,7 +96,7 @@
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end" style="min-width: 250px;">
                     <li>
-                        <a class="dropdown-item py-2 px-3 rounded-3 text-light d-flex align-items-center gap-3" href="{{ route('profile.edit') }}">
+                        <a class="dropdown-item py-2 px-3 rounded-3 d-flex align-items-center gap-3" href="{{ route('profile.edit') }}">
                             <div class="bg-primary bg-opacity-10 p-2 rounded-2"><i class="bi bi-person-fill text-primary"></i></div>
                             <span>Kişisel Bilgiler</span>
                         </a>

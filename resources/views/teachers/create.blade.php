@@ -8,7 +8,7 @@
         <div class="col-lg-8">
             <div class="card border-0 shadow-lg">
                 <div class="card-header bg-transparent border-light border-opacity-10 py-3">
-                    <h5 class="mb-0 fw-bold text-light">
+                    <h5 class="mb-0 fw-bold text-white">
                         <i class="bi bi-person-plus-fill me-2 text-primary"></i>
                         Yeni Öğretmen Profil Tanımlama
                     </h5>

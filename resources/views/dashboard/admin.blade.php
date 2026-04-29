@@ -99,7 +99,7 @@
                                                         {{ strtoupper(substr($assignment->teacher->name, 0, 1)) }}
                                                     </div>
                                                     <div>
-                                                        <div class="fw-bold text-light">{{ $assignment->teacher->name }}</div>
+                                                        <div class="fw-bold text-white">{{ $assignment->teacher->name }}</div>
                                                         <div class="text-white-50 small opacity-75" style="font-size: 11px;">{{ $assignment->teacher->branch }}</div>
                                                     </div>
                                                 </div>
@@ -137,7 +137,7 @@
                     @else
                         <div class="text-center py-5">
                             <div class="mb-4 opacity-10"><i class="bi bi-calendar-event" style="font-size: 80px;"></i></div>
-                            <h5 class="text-light fw-bold">Henüz Bugün İçin Çizelge Yayınlanmadı</h5>
+                            <h5 class="text-white fw-bold">Henüz Bugün İçin Çizelge Yayınlanmadı</h5>
                             <p class="text-white-50 mb-4 px-5">Günlük nöbet akışını başlatmak için çizelge oluşturun veya mevcut bir taslağı yayınlayın.</p>
                             <a href="{{ route('schedules.create') }}" class="btn btn-primary px-5 py-3 rounded-3 shadow">
                                 <i class="bi bi-plus-lg me-2"></i> Bugünün Çizelgesini Başlat
