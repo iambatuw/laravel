@@ -1,5 +1,5 @@
 <?php
-die('TEST');
+die("Sunucudaki PHP Sürümü: " . PHP_VERSION . " (Gerekli: 8.2+)");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
