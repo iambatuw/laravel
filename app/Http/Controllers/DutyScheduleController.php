@@ -110,7 +110,7 @@ class DutyScheduleController extends Controller
     }
 
     // Çizelgeyi yazdır/PDF olarak indir
-    public function print(DutySchedule $schedule)
+    public function printSchedule(DutySchedule $schedule)
     {
         $schedule->load(['assignments.teacher', 'assignments.location', 'creator']);
         $groupedAssignments = $schedule->assignments->groupBy('period');

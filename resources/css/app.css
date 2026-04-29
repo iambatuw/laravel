@@ -255,11 +255,15 @@ label { color: rgba(255,255,255,0.9) !important; font-weight: 700; margin-bottom
 @media (max-width: 992px) { .menu-toggle { display: flex; } }
 
 /* Dropdown Dark Theme Override */
-.dropdown-menu {
-    background: var(--sidebar-bg) !important;
+.dropdown-menu,
+.dropdown-menu.bg-dark,
+ul.dropdown-menu {
+    background-color: rgb(30, 41, 59) !important;
+    background: rgb(30, 41, 59) !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
     border-radius: 16px !important;
     box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+    padding: 8px !important;
 }
 .dropdown-menu .dropdown-item {
     color: rgba(255,255,255,0.8) !important;

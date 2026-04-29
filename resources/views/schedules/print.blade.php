@@ -21,7 +21,7 @@
 <body>
     <h1>{{ $schedule->title ?? $schedule->date->format('d.m.Y') . ' Nöbet Çizelgesi' }}</h1>
     <div class="meta">
-        Tarih: {{ $schedule->date->format('d.m.Y') }} | Gün: {{ $schedule->day_of_week }}<br>
+        Tarih: {{ $schedule->date->format('d.m.Y') }} | Gün: {{ $schedule->day_of_week ?? '' }}<br>
         Durum: {{ $schedule->status === 'published' ? 'Yayında' : ($schedule->status === 'draft' ? 'Taslak' : 'Tamamlandı') }}
     </div>
 

@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
             ->parameters(['nobet-cizelgeleri' => 'schedule'])
             ->names('schedules');
         Route::patch('/nobet-cizelgeleri/{schedule}/yayinla', [DutyScheduleController::class, 'publish'])->name('schedules.publish');
-        Route::get('/nobet-cizelgeleri/{schedule}/yazdir', [DutyScheduleController::class, 'print'])->name('schedules.print');
+        Route::get('/nobet-cizelgeleri/{schedule}/yazdir', [DutyScheduleController::class, 'printSchedule'])->name('schedules.print');
 
         // Nobet Atamalari
         Route::post('/nobet-atamalari', [DutyAssignmentController::class, 'store'])->name('assignments.store');
