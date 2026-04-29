@@ -16,6 +16,7 @@ class SecurityHeadersMiddleware
             "default-src 'self'",
             "base-uri 'self'",
             "form-action 'self'",
+            "frame-src https://challenges.cloudflare.com",
             "frame-ancestors 'none'",
             "img-src 'self' data: https:",
             "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net",
