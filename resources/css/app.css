@@ -283,6 +283,16 @@ label {
 }
 .form-control::placeholder { color: var(--text-muted) !important; }
 
+.form-select option,
+select.form-control option {
+    background: #1e293b !important;
+    color: #f1f5f9 !important;
+}
+select option {
+    background: #1e293b;
+    color: #f1f5f9;
+}
+
 .form-control[type="file"] {
     padding: 8px 12px !important;
     font-size: 13px !important;
