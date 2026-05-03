@@ -61,4 +61,4 @@ jobs:
             **/migration_log.txt
           log-level: standard
           dry-run: false
-          dangerous-clean-slate: false
+          dangerous-clean-slate: true
